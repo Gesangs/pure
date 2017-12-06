@@ -43,19 +43,6 @@ class App extends Component {
           ? <WeiboList list={this.state.weiboList} />
           : <div>加载中~~~</div>
         }
-        {
-          // this.state.weiboList.map((item) => {
-          //   <div>
-          //       <div>{item.name}</div>
-          //       <div>{item.time}</div>
-          //       <div>{item.head_pic}</div>
-          //       <div>{item.source}</div>
-          //       <div>{item.content}</div>
-          //       <div>{item.reposts_count}</div>
-          //   </div>
-          // })
-        }
-        {/* <div onClick={this._logout.bind(this)}>登出</div> */}
       </div>  
     );
   }
