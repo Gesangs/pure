@@ -16,6 +16,7 @@ class App extends Component {
   }
   componentDidMount() {
     getNewWeiBo(this.state.access_token).then((res) => {
+      console.log(res.data.statuses)
       this.setState({
         weiboList: this._handleWeiboList(res.data.statuses)
       })

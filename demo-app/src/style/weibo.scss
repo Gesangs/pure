@@ -1,0 +1,83 @@
+$left: 46px;
+$height: 36px;
+$lineHeight: 25px;
+.list{
+    width: 92%;
+    margin: 0 auto;
+    border-bottom: 1px solid rgb(240, 240, 240);
+}
+.listHead{
+    display: flex;
+    margin-top: 15px;
+    height: $height;
+    .listPic{
+        flex: 0 0 $height;
+        height: $height;
+        width: $height;
+        border-radius: $height;
+    }
+    .listNameS{
+        flex: 1;
+        height: $height;
+        padding-left: 10px; 
+    }
+    .listName{
+        font-size: 12px;
+        font-weight: bold;
+    }
+    .listSource{
+        font-size: 10px;
+        color: rgb(184, 184, 184)
+    } 
+}
+.listContent{
+    box-sizing: border-box;
+    word-break:break-all;
+    width:100%;
+    padding-left: $left;
+    line-height: $lineHeight;
+    font-size: 13px;
+}
+.listImg{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    .weiboImg{
+        display: block;
+        width: 32%;
+        height: 0px;
+        padding-bottom: 32%;
+        overflow:hidden;
+        margin-left: 2px;
+        margin-bottom: 2px;
+        .img{
+            width: 100%;
+        } 
+    }
+}
+.retWeibo{
+    box-sizing: border-box;
+    padding: 5px;
+    margin: 5px 0px 5px $left;
+    background-color: rgb(240, 240, 240);
+    font-size: 13px;
+    line-height: $lineHeight;
+    word-break:break-all;
+    .retFoot{
+        font-size: 10px;
+        color: rgb(164, 164, 164)
+    }
+}
+.listFoot{
+    width: 100%;
+    box-sizing: border-box;
+    padding-left: $left; 
+    div{
+        display: inline-block;
+        width: 32%;
+        height: 40px;
+        color: rgb(124, 124, 124);
+        font-size: 13px;
+        line-height: 40px;
+    }
+}

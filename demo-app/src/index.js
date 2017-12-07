@@ -6,14 +6,15 @@ import App from './App';
 import { Key, access_token } from './config'
 import axios from 'axios'
 import registerServiceWorker from './registerServiceWorker';
-if(!access_token) {
+const Code = window.location.href.split('=')[1];
+if(!Code) {
     window.location.href = `https://api.weibo.com/oauth2/authorize?client_id=${Key}&response_type=code&redirect_uri=http://127.0.0.1:3000`
 }
-const Code = window.location.href.split('=')[1];
-if(Code) {
+if(!access_token) {
     _getShouquan()
 }
 function _getShouquan() {
+  const Code = window.location.href.split('=')[1];
       axios.get('/api/shouquan',{
         params: Code
       }).then((res) => {
