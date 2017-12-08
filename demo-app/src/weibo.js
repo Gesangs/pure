@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types'
 import './style/weibo.scss'
+import {Emotion} from './base/emotion.js'
 
 class ListImg extends Component {
     constructor() {
@@ -20,34 +21,54 @@ class ListImg extends Component {
     }
 }
 
-// class ListContent extends Component {
-//     constructor() {
-//         super()
-//     }
-//     render() {
-//         const content = this.props.con;
-//         return(
-//             <div>
-//                 {content.map((item, index) => {
-//                     return <div>
-//                     {switch(Object.keys(item)) {
-//                         case 'user':
-//                             return <span>Object.values(item)</span>;break;
-//                         case 'all':
-//                             return <span>Object.values(item)</span>;break;
-//                         case 'topic':
-//                             return <span>Object.values(item)</span>;break;
-//                         case 'icon':
-//                             return <span>Object.values(item)</span>;break;
-//                         default:
-//                             return <span>Object.values(item)</span>;break;
-//                     }}
-//                     </div>
-//                 })}
-//             </div>
-//         )
-//     }
-// }
+class ListContent extends Component {
+    constructor() {
+        super()
+    }
+    getEmotion(key) {
+        const value = Emotion.find(function(item, index, arr) {
+            return item.value === key
+        })
+        return value.url;
+    }
+    handleNodes(text) {
+        const pattern = /([^>]*)(<([a-z/][-a-z0-9_:.]*)[^>/]*(\/*)>)([^<]*)/g,
+        nodes = [];
+        let matchArr;
+        while ((matchArr = pattern.exec(text))) {
+            if(matchArr[1]) nodes.push(['text',matchArr[1]]);
+            switch(matchArr[3]) {
+                case 'user':
+                    nodes.push(['user',matchArr[5]]);break;
+                case 'all':
+                    nodes.push(['all',matchArr[5]]);break;
+                case 'topic':
+                    nodes.push(['topic',matchArr[5]]);break;
+                case 'icon':
+                    nodes.push(['icon',this.getEmotion(matchArr[5])]);break;
+                default:
+                    nodes.push(['text',matchArr[5]]);break;
+              }
+            }
+            return nodes
+    }
+    render() {
+        const content = this.handleNodes(this.props.con);
+        return(
+            <div>
+                {content.map((item, index) => {
+                    return <span>
+                        {item[0] === 'user' ? <a>{item[1]}</a> : ''}
+                        {item[0] === 'all' ? <a>{item[1]}</a> : ''}
+                        {item[0] === 'icon' ? <img src={item[1]} /> : ''}
+                        {item[0] === 'text' ? <span>{item[1]}</span> : ''}
+                        {item[0] === 'topic' ? <a>{item[1]}</a> : ''}
+                    </span>
+                })}
+            </div>
+        )
+    }
+}
 
 class Weibo extends Component {
     constructor() {
@@ -66,12 +87,12 @@ class Weibo extends Component {
                     </div>    
                 </div>
                 <div className='listContent'>
-                    <div>{weibo.content}</div>
+                    <ListContent con={weibo.content} />
                     { weibo.pic_urls.length ? <ListImg imgs={weibo.pic_urls} /> : '' }
                 </div>
                 {weibo.retweeted_status ? <div className='retWeibo'>
                     <div className='retContent'>
-                        <div>{weibo.retweeted_status.name}: {weibo.retweeted_status.content}</div>
+                        <div>{weibo.retweeted_status.name}: <ListContent con={weibo.retweeted_status.content} /></div>
                         {weibo.retweeted_status.pic_urls.length ? <ListImg imgs={weibo.retweeted_status.pic_urls} /> : ''}
                     </div>
                     <div className='retFoot'>

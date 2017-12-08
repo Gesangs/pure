@@ -1,5 +1,6 @@
 import Moment from '../moment.js'
-
+import {shortToLong} from '../../api/weibo'
+import {access_token} from '../../config'
 
 export default class Weibo {
     constructor({
@@ -38,7 +39,16 @@ export default class Weibo {
         this.retweeted_status = retweeted_status
     }
 }
-
+function handleUrl(url) {
+    shortToLong(access_token, url).then((res) => {
+      let long = JSON.parse(res.data).urls[0].url_long
+      if(long.match(/miaopai/g)``) {
+          const audioUrl = long.match(/([^\/:\.][0-9a-zA-Z]+__)/g)[0]
+          return `http://gslb.miaopai.com/stream/${audioUrl}.mp4`
+      }
+    })
+    return url;
+}
 function handleRetWeibo(weibo) {
     return new Weibo({
         id: weibo.id,
@@ -50,33 +60,20 @@ function handleRetWeibo(weibo) {
         attitudes_count: `点赞${weibo.attitudes_count}`
     })
 }
-
+// .replace(/\/\/(@[^:：]+)(:|：)/g,'//<user>$1</user>:')
+// .replace(/(@[\u4e00-\u9fa5a-zA-Z0-9_-]){4,30}/g,'<user>$1</user>')
+// .replace(/\u200B/g,'')
+// .match(/(http:\/\/t.cn\/\w+)/g)[0]
 function handleContent(text) {
-    // text = text.replace(/\u200B/g,'')
-    //            .replace(/(@[^:]+):/g,'<user>$1</user>:')
-    //            .replace(/\[([^\[\]]+)\]/g, '<icon>$1</icon>')
-    //            .replace(/#([^#]+)#/g, '<topic>$1</topic>')
-    //            .replace(/全文:.+/g, '<all>查看全文</all>');
-    //            const pattern = /([^>]*)(<([a-z/][-a-z0-9_:.]*)[^>/]*(\/*)>)([^<]*)/g,
-    //            nodes = [];
-    //            let matchArr;
-          
-    //        while ((matchArr = pattern.exec(text))) {
-    //           switch(matchArr[3]) {
-    //               case 'user':
-    //                   nodes.push({user: matchArr[5]});break;
-    //               case 'all':
-    //                   nodes.push({all: matchArr[5]});break;
-    //               case 'topic':
-    //                   nodes.push({topic: matchArr[5]});break;
-    //               case 'icon':
-    //                   nodes.push({icon: matchArr[5]});break;
-    //               default:
-    //                   nodes.push({text: matchArr[5]});break;
-    //             }
-    //           }
-    // return nodes
-    return text.replace(/\u200B/g,'')
+    const audioUrl = handleUrl(text.match(/(http:\/\/t.cn\/\w+)/g))
+    text = text.replace(/(@[^\s|\/|:|：|@]+)/g, '<user>$1</user>')
+               .replace(/\[([^\[\]]+)\]/g, '<icon>[$1]</icon>')
+               .replace(/(#[^#]+#)/g, '<topic>$1</topic>')
+               .replace(/...全文.+/g, '...<all>查看全文</all>')
+               .replace(/(http:\/\/t.cn\/\w+)/g, audioUrl)
+               .replace(/\u200B/g,'');
+    if(text == text) text = `${text}<p></p>`
+    return text;
 }
 export function handleWeibo(weibo) {
     return new Weibo({

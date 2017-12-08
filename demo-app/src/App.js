@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { getNewWeiBo,getUserWeiBo } from './api/weibo'
+import { getNewWeiBo,shortToLong } from './api/weibo'
 import {handleWeibo} from './base/class/weibo'
 import {Logout} from './api/user'
 import WeiboList from './weiboList'
-import { access_token } from './config'
+import { Key, access_token } from './config'
 
 class App extends Component {
 
@@ -42,7 +42,7 @@ class App extends Component {
         {
           this.state.weiboList.length
           ? <WeiboList list={this.state.weiboList} />
-          : <div>加载中~~~</div>
+          : <div onClick={this._logout.bind(this)}>加载中~~~</div>
         }
       </div>  
     );

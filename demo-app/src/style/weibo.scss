@@ -37,6 +37,10 @@ $lineHeight: 25px;
     padding-left: $left;
     line-height: $lineHeight;
     font-size: 13px;
+    a{
+        text-decoration: none;
+        color: #eb7350;
+    }
 }
 .listImg{
     display: flex;
@@ -63,6 +67,10 @@ $lineHeight: 25px;
     font-size: 13px;
     line-height: $lineHeight;
     word-break:break-all;
+    a{
+        text-decoration: none;
+        color: #eb7350;
+    }
     .retFoot{
         font-size: 10px;
         color: rgb(164, 164, 164)

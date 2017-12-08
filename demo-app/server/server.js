@@ -3,7 +3,16 @@ var app = express();
 var request = require('request');
 var apiRoutes = express.Router()
 
-
+apiRoutes.get('/toLong', function(req, res) {
+    const short = req.query
+    console.log(short)
+    request.get({
+        url: `https://api.weibo.com/2/short_url/expand.json?url_short=${short.url}&access_token=${short.ass}`,
+    },function(error, response, body) {
+        console.log(body)
+        res.json(body)
+    })
+})
 apiRoutes.get('/shouquan', function(req, res) {
     const Code = (req.query)['0']
     request.post(
