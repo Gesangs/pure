@@ -12,7 +12,7 @@ class ListImg extends Component {
         return(
             <div className='listImg'>
                 {img.map((item, index) => {
-                    return <div className={img.length !== 1 ? 'weiboImg' : ''}>
+                    return <div className={img.length !== 1 ? 'weiboImg' : ''} key={index}>
                         <img src={item.thumbnail_pic} key={index} className='img' />
                     </div>
                 })}
@@ -46,6 +46,8 @@ class ListContent extends Component {
                     nodes.push(['topic',matchArr[5]]);break;
                 case 'icon':
                     nodes.push(['icon',this.getEmotion(matchArr[5])]);break;
+                case 'url' :
+                    nodes.push(['url', matchArr[5]]);break;
                 default:
                     nodes.push(['text',matchArr[5]]);break;
               }
@@ -57,12 +59,13 @@ class ListContent extends Component {
         return(
             <div>
                 {content.map((item, index) => {
-                    return <span>
+                    return <span key={index}>
                         {item[0] === 'user' ? <a>{item[1]}</a> : ''}
                         {item[0] === 'all' ? <a>{item[1]}</a> : ''}
                         {item[0] === 'icon' ? <img src={item[1]} /> : ''}
                         {item[0] === 'text' ? <span>{item[1]}</span> : ''}
                         {item[0] === 'topic' ? <a>{item[1]}</a> : ''}
+                        {item[0] === 'url' ? <a href={item[1]}>查看原链接</a> : ''}
                     </span>
                 })}
             </div>
@@ -92,7 +95,7 @@ class Weibo extends Component {
                 </div>
                 {weibo.retweeted_status ? <div className='retWeibo'>
                     <div className='retContent'>
-                        <div>{weibo.retweeted_status.name}: <ListContent con={weibo.retweeted_status.content} /></div>
+                        <div><a>{weibo.retweeted_status.name}</a>: <ListContent con={weibo.retweeted_status.content} /></div>
                         {weibo.retweeted_status.pic_urls.length ? <ListImg imgs={weibo.retweeted_status.pic_urls} /> : ''}
                     </div>
                     <div className='retFoot'>

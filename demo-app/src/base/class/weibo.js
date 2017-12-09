@@ -12,6 +12,7 @@ export default class Weibo {
         // 来自
         source,
         content,
+        short_urls,
         pic_urls,
         // 是否收藏
         favorited,
@@ -31,6 +32,7 @@ export default class Weibo {
         this.head_pic = head_pic
         this.source = source
         this.content = content
+        this.short_urls = short_urls
         this.pic_urls = pic_urls
         this.favorited = favorited
         this.reposts_count = reposts_count
@@ -39,16 +41,7 @@ export default class Weibo {
         this.retweeted_status = retweeted_status
     }
 }
-function handleUrl(url) {
-    shortToLong(access_token, url).then((res) => {
-      let long = JSON.parse(res.data).urls[0].url_long
-      if(long.match(/miaopai/g)``) {
-          const audioUrl = long.match(/([^\/:\.][0-9a-zA-Z]+__)/g)[0]
-          return `http://gslb.miaopai.com/stream/${audioUrl}.mp4`
-      }
-    })
-    return url;
-}
+
 function handleRetWeibo(weibo) {
     return new Weibo({
         id: weibo.id,
@@ -65,12 +58,12 @@ function handleRetWeibo(weibo) {
 // .replace(/\u200B/g,'')
 // .match(/(http:\/\/t.cn\/\w+)/g)[0]
 function handleContent(text) {
-    const audioUrl = handleUrl(text.match(/(http:\/\/t.cn\/\w+)/g))
+    // const audioUrl = handleUrl(text.match(/(http:\/\/t.cn\/\w+)/g))
     text = text.replace(/(@[^\s|\/|:|：|@]+)/g, '<user>$1</user>')
                .replace(/\[([^\[\]]+)\]/g, '<icon>[$1]</icon>')
                .replace(/(#[^#]+#)/g, '<topic>$1</topic>')
                .replace(/...全文.+/g, '...<all>查看全文</all>')
-               .replace(/(http:\/\/t.cn\/\w+)/g, audioUrl)
+               .replace(/(http:\/\/t.cn\/\w+)/g, '<url>$1</url> ')
                .replace(/\u200B/g,'');
     if(text == text) text = `${text}<p></p>`
     return text;
@@ -84,6 +77,7 @@ export function handleWeibo(weibo) {
         head_pic: weibo.user.profile_image_url,
         source: (weibo.source).replace(/<[^>]+>/g, ""),
         content: handleContent(weibo.text),
+        short_urls: weibo.text.match(/(http:\/\/t.cn\/\w+)/g),
         pic_urls: weibo.pic_urls,
         favorited: weibo.favorited,
         reposts_count: weibo.reposts_count,

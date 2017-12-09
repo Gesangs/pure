@@ -1,6 +1,5 @@
 import jsonp from './../base/jsonp'
 import axios from 'axios'
-
 // 获取当前登录用户及其所关注（授权）用户的最新微博
 // http://open.weibo.com/wiki/2/statuses/home_timeline
 export function getNewWeiBo(ass) {

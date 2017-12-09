@@ -22,11 +22,28 @@ class App extends Component {
       })
     })
   }
+  _handleUrl(urls) {
+    urls = [].concat.apply([],urls)
+    urls.forEach((item, index) => {
+      
+    })
+    shortToLong(access_token, url).then((res) => {
+      let long = JSON.parse(res.data).urls[0].url_long
+      if(long.match(/miaopai/g)``) {
+          const audioUrl = long.match(/([^\/:\.][0-9a-zA-Z]+__)/g)[0]
+          return `http://gslb.miaopai.com/stream/${audioUrl}.mp4`
+      }
+    })
+    return url;
+  }
   _handleWeiboList(weibo) {
     weibo = weibo || []
     const List = []
+    const url_list = []
     weibo.forEach((item, index) => {
-      List.push(handleWeibo(item))
+      const weibos = handleWeibo(item)
+      List.push(weibos)
+      url_list.push(weibos.short_urls)
     });
     return List
   }
