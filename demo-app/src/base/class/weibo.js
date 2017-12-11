@@ -77,7 +77,7 @@ export function handleWeibo(weibo) {
         head_pic: weibo.user.profile_image_url,
         source: (weibo.source).replace(/<[^>]+>/g, ""),
         content: handleContent(weibo.text),
-        short_urls: weibo.text.match(/(http:\/\/t.cn\/\w+)/g),
+        short_urls: weibo.text.match(/(http:\/\/t.cn\/\w+)/g) || [],
         pic_urls: weibo.pic_urls,
         favorited: weibo.favorited,
         reposts_count: weibo.reposts_count,

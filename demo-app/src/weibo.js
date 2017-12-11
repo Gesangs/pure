@@ -80,6 +80,7 @@ class Weibo extends Component {
 
     render() {
         const { weibo } = this.props
+        console.log(weibo)
         return(
             <div className='list'>
                 <div className='listHead'>
@@ -92,7 +93,10 @@ class Weibo extends Component {
                 <div className='listContent'>
                     <ListContent con={weibo.content} />
                     { weibo.pic_urls.length ? <ListImg imgs={weibo.pic_urls} /> : '' }
+                    {/* 秒拍视频 */}
+                    { weibo.videoUrl ? <div><video src={weibo.videoUrl}></video></div> : '' }
                 </div>
+                {/* 转发的微博 */}
                 {weibo.retweeted_status ? <div className='retWeibo'>
                     <div className='retContent'>
                         <div><a>{weibo.retweeted_status.name}</a>: <ListContent con={weibo.retweeted_status.content} /></div>

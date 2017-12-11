@@ -22,29 +22,36 @@ class App extends Component {
       })
     })
   }
-  _handleUrl(urls) {
+  // 提取短链一次性提交上去转成原始链接,获取视频
+  _handleUrl(list, urls) {
     urls = [].concat.apply([],urls)
-    urls.forEach((item, index) => {
-      
+    shortToLong(access_token, urls).then((res) => {
+      const url_result = JSON.parse(res.data)
+      this._concatVideoUrl(list, url_result)
     })
-    shortToLong(access_token, url).then((res) => {
-      let long = JSON.parse(res.data).urls[0].url_long
-      if(long.match(/miaopai/g)``) {
-          const audioUrl = long.match(/([^\/:\.][0-9a-zA-Z]+__)/g)[0]
-          return `http://gslb.miaopai.com/stream/${audioUrl}.mp4`
+  }
+  _concatVideoUrl(list, url) {
+    url.urls.map((item, index) => {
+      if(new RegExp("miaopai").test(item.url_long)) {
+        const video_url = `http://gslb.miaopai.com/stream/${item.url_long.split('/')[4].split('.')[0]}.mp4`
+        const index = list.findIndex(function(value) { 
+          return new RegExp(item.url_short).test(value.short_urls.join(''))
+        })
+        Object.assign(list[index], {videoUrl: video_url })
       }
     })
-    return url;
   }
-  _handleWeiboList(weibo) {
-    weibo = weibo || []
+  _handleWeiboList(weibos) {
+    weibos = weibos || []
     const List = []
     const url_list = []
-    weibo.forEach((item, index) => {
-      const weibos = handleWeibo(item)
-      List.push(weibos)
-      url_list.push(weibos.short_urls)
+    weibos.forEach((item, index) => {
+      const weibo = handleWeibo(item)
+      List.push(weibo)
+      if(weibo.short_urls) url_list.push(weibo.short_urls)
     });
+    this._handleUrl(List, url_list)
+    console.log(List)
     return List
   }
 
