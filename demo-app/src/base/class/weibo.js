@@ -59,10 +59,10 @@ function handleRetWeibo(weibo) {
 // .match(/(http:\/\/t.cn\/\w+)/g)[0]
 function handleContent(text) {
     // const audioUrl = handleUrl(text.match(/(http:\/\/t.cn\/\w+)/g))
-    text = text.replace(/(@[^\s|\/|:|：|@]+)/g, '<user>$1</user>')
+    text = text.replace(/(@[^\s|\/|:|：|@|，|。]+)/g, '<user>$1</user>')
                .replace(/\[([^\[\]]+)\]/g, '<icon>[$1]</icon>')
                .replace(/(#[^#]+#)/g, '<topic>$1</topic>')
-               .replace(/...全文.+/g, '...<all>查看全文</all>')
+               .replace(/...全文.+/g, '...<all> 查看全文</all>')
                .replace(/(http:\/\/t.cn\/\w+)/g, '<url>$1</url> ')
                .replace(/\u200B/g,'');
     if(text == text) text = `${text}<p></p>`
