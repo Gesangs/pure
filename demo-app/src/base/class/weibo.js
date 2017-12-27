@@ -1,4 +1,4 @@
-import Moment from '../moment.js'
+import { format } from '../date-utils'
 import {shortToLong} from '../../api/weibo'
 import {access_token} from '../../config'
 
@@ -73,7 +73,7 @@ export function handleWeibo(weibo) {
         id: weibo.id,
         mid: weibo.mid,
         name: weibo.user.screen_name,
-        time: Moment(weibo.created_at).fromNow(),
+        time: format(weibo.created_at),
         head_pic: weibo.user.profile_image_url,
         source: (weibo.source).replace(/<[^>]+>/g, ""),
         content: handleContent(weibo.text),

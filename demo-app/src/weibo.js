@@ -100,21 +100,15 @@ class Weibo extends Component {
           <div className="listNameS">
             <div className="listName">{weibo.name}</div>
             <div className="listSource">
-              {weibo.time} 来自 {weibo.source}
+              {weibo.time} 
+              {weibo.source ? <span> 来自 </span> : ""} 
+              {weibo.source}
             </div>
           </div>
         </div>
         <div className="listContent">
           <ListContent con={weibo.content} />
           {weibo.pic_urls.length ? <ListImg imgs={weibo.pic_urls} /> : ""}
-          {/* 秒拍视频 */}
-          {weibo.videoUrl ? (
-            <div>
-              <video src={weibo.videoUrl} />
-            </div>
-          ) : (
-            ""
-          )}
         </div>
         {/* 转发的微博 */}
         {weibo.retweeted_status ? (
