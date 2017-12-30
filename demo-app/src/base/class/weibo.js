@@ -1,4 +1,4 @@
-import { format } from '../date-utils'
+import { format } from '../../utils/date-utils'
 import {shortToLong} from '../../api/weibo'
 import {access_token} from '../../config'
 
