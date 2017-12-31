@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
-import "./style/weibo.scss";
-import { Emotion } from "./base/emotion";
+import './style/weibo.css'
+
 
 class ListImg extends Component {
   constructor() {
@@ -29,8 +28,7 @@ class ListContent extends Component {
     super();
   }
   getEmotion(key) {
-    console.log(Emotion)
-    const value = Emotion.find(function(item, index, arr) {
+    const value = this.props.Emotion.find(function(item, index, arr) {
       return item.value === key;
     });
     if(!value) return;
@@ -92,7 +90,7 @@ class Weibo extends Component {
   }
 
   render() {
-    const { weibo } = this.props;
+    const { weibo, Emotion } = this.props;
     return (
       <div className="list">
         <div className="listHead">
@@ -107,7 +105,7 @@ class Weibo extends Component {
           </div>
         </div>
         <div className="listContent">
-          <ListContent con={weibo.content} />
+          <ListContent con={weibo.content} Emotion={Emotion} />
           {weibo.pic_urls.length ? <ListImg imgs={weibo.pic_urls} /> : ""}
         </div>
         {/* 转发的微博 */}
@@ -116,7 +114,7 @@ class Weibo extends Component {
             <div className="retContent">
               <div>
                 <a>{weibo.retweeted_status.name}</a>:{" "}
-                <ListContent con={weibo.retweeted_status.content} />
+                <ListContent con={weibo.retweeted_status.content} Emotion={Emotion} />
               </div>
               {weibo.retweeted_status.pic_urls.length ? (
                 <ListImg imgs={weibo.retweeted_status.pic_urls} />

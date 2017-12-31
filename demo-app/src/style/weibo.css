@@ -1,6 +1,4 @@
-$left: 1px;
-$height: 36px;
-$lineHeight: 25px;
+
 .list {
   width: 92%;
   margin: 0 auto;
@@ -10,44 +8,46 @@ $lineHeight: 25px;
   display: flex;
   margin-top: 15px;
   margin-bottom: 8px;
-  height: $height;
-  .listPic {
-    flex: 0 0 $height;
-    height: $height;
-    width: $height;
-    border-radius: $height;
+  height: 36px;
+}
+  .listHead  .listPic {
+    flex: 0 0 36px;
+    height: 36px;
+    width: 36px;
+    border-radius: 36px;
   }
-  .listNameS {
+  .listHead  .listNameS {
     flex: 1;
-    height: $height;
+    height: 36px;
     padding-left: 10px;
   }
-  .listName {
+  .listHead  .listName {
     font-size: 12px;
     font-weight: bold;
   }
-  .listSource {
+  .listHead  .listSource {
     font-size: 10px;
     color: rgb(184, 184, 184);
   }
-}
+
 .listContent {
   box-sizing: border-box;
   word-break: break-all;
   width: 100%;
-  padding-left: $left;
-  line-height: $lineHeight;
+  padding-left: 1px;
+  line-height: 25px;
   font-size: 13px;
-  a {
+}
+  .listContent  a {
     text-decoration: none;
     color: #eb7350;
   }
-}
 .listImg {
   display: flex;
   flex-wrap: wrap;
   width: 100%;
-  .weiboImg {
+}
+  .listImg  .weiboImg {
     display: block;
     width: 32%;
     height: 0px;
@@ -58,29 +58,31 @@ $lineHeight: 25px;
     background-size: cover;
     background-position: top;
   }
-}
+
 .retWeibo {
   box-sizing: border-box;
   padding: 5px;
-  margin: 5px 0px 5px $left;
+  margin: 5px 0px 5px 1px;
   background-color: rgb(240, 240, 240);
   font-size: 13px;
-  line-height: $lineHeight;
+  line-height: 25px;
   word-break: break-all;
-  a {
+}
+  .retWeibo  a {
     text-decoration: none;
     color: #eb7350;
   }
-  .retFoot {
+  .retWeibo  .retFoot {
     font-size: 10px;
     color: rgb(164, 164, 164);
   }
-}
+
 .listFoot {
   width: 100%;
   box-sizing: border-box;
-  padding-left: $left;
-  div {
+  padding-left: 1px;
+}
+  .listFoot  div {
     display: inline-block;
     width: 32%;
     height: 40px;
@@ -88,4 +90,4 @@ $lineHeight: 25px;
     font-size: 13px;
     line-height: 40px;
   }
-}
+

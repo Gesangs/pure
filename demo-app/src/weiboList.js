@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 import { getNewWeiBo, getEmotions } from "./api/weibo";
 import { handleWeibo } from "./base/class/weibo";
 import "./style/weiboList.scss";
