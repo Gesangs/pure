@@ -1,0 +1,30 @@
+.listImg {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+.listImg .weiboImg {
+  display: block;
+  width: 32%;
+  height: 0px;
+  padding-bottom: 32%;
+  overflow: hidden;
+  margin-left: 2px;
+  margin-bottom: 2px;
+  background-size: cover;
+  background-position: top;
+}
+
+.fullImg {
+  position: absolute;
+  width: 200px;
+  height: 500px;
+  background-color: #000000;
+  z-index: 100;
+}
+
+.fullListImg {
+}
+
+.fullWeiboImg {
+}

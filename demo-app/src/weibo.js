@@ -1,23 +1,67 @@
 import React, { Component } from "react";
-import './style/weibo.css'
+import "./style/weibo.css";
 
+class ImageZoom extends Component {
+  constructor() {
+    super();
+  }
+
+  ToggleFull() {
+    if (this.props.toggle) {
+      this.props.toggle();
+    }
+  }
+  handleImageSrc(src) {
+    return src.replace(/thumbnail/, "large");
+  }
+  render() {
+    const imgs = this.props.imgs;
+    return (
+      <div className="zoomBack">
+        {imgs.map((item, index) => (
+          <img
+            src={this.handleImageSrc(item.thumbnail_pic)}
+            className="imgZoom"
+            onClick={this.ToggleFull.bind(this)}
+            key={index}
+          />
+        ))}
+      </div>
+    );
+  }
+}
 
 class ListImg extends Component {
   constructor() {
     super();
+    this.state = {
+      isFull: false
+    };
+  }
+  toggleFull() {
+    this.setState({
+      isFull: !this.state.isFull
+    });
   }
   render() {
-    const img = this.props.imgs;
+    const imgs = this.props.imgs;
     return (
       <div className="listImg">
-        {img.map((item, index) => {
+        {imgs.map((item, index) => {
           return (
-            <div className={img.length !== 1 ? "weiboImg" : ""}
-                 key={index}
-                 style={{backgroundImage:`url(${item.thumbnail_pic})`}}>
-            </div>
+            <div
+              className="weiboImg"
+              key={index}
+              style={{ backgroundImage: `url(${item.thumbnail_pic})` }}
+              onClick={this.toggleFull.bind(this)}
+            />
           );
         })}
+        {this.state.isFull ? (
+          <ImageZoom imgs={imgs} toggle={this.toggleFull.bind(this)} />
+        ) : (
+          ""
+        )}
       </div>
     );
   }
@@ -31,7 +75,7 @@ class ListContent extends Component {
     const value = this.props.Emotion.find(function(item, index, arr) {
       return item.value === key;
     });
-    if(!value) return;
+    if (!value) return;
     else return value.url;
   }
   handleNodes(text) {
@@ -98,8 +142,8 @@ class Weibo extends Component {
           <div className="listNameS">
             <div className="listName">{weibo.name}</div>
             <div className="listSource">
-              {weibo.time} 
-              {weibo.source ? <span> 来自 </span> : ""} 
+              {weibo.time}
+              {weibo.source ? <span> 来自 </span> : ""}
               {weibo.source}
             </div>
           </div>
@@ -114,7 +158,10 @@ class Weibo extends Component {
             <div className="retContent">
               <div>
                 <a>{weibo.retweeted_status.name}</a>:{" "}
-                <ListContent con={weibo.retweeted_status.content} Emotion={Emotion} />
+                <ListContent
+                  con={weibo.retweeted_status.content}
+                  Emotion={Emotion}
+                />
               </div>
               {weibo.retweeted_status.pic_urls.length ? (
                 <ListImg imgs={weibo.retweeted_status.pic_urls} />
