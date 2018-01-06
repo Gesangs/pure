@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "./style/weibo.css";
+import "../style/weibo.css";
 
 class ImageZoom extends Component {
   constructor() {
@@ -43,6 +43,12 @@ class ListImg extends Component {
       isFull: !this.state.isFull
     });
   }
+  checkLongImg(url) {
+    const img = new Image()
+    img.src = url;
+    if(img.height > (img.width*2)) return url.replace(/thumbnail/, "large");
+    else return url
+  }
   render() {
     const imgs = this.props.imgs;
     return (
@@ -52,7 +58,7 @@ class ListImg extends Component {
             <div
               className="weiboImg"
               key={index}
-              style={{ backgroundImage: `url(${item.thumbnail_pic})` }}
+              style={{ backgroundImage: `url(${this.checkLongImg(item.thumbnail_pic)})` }}
               onClick={this.toggleFull.bind(this)}
             />
           );

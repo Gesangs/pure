@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import { getNewWeiBo, getEmotions } from "./api/weibo";
-import { handleWeibo } from "./base/class/weibo";
-import "./style/weiboList.css";
+import { getNewWeiBo, getEmotions } from "../api/weibo";
+import { handleWeibo } from "../base/class/weibo";
+import "../style/weiboList.css";
 import Weibo from "./weibo";
-import { Key, access_token } from "./config";
+import { Key, access_token } from "../config";
 
 class WeiboList extends Component {
   constructor() {

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import './style/headFoot.css'
+import '../style/headFoot.css'
 
 class Foot extends Component {
     constructor() {
@@ -7,8 +7,12 @@ class Foot extends Component {
     }
     render() {
         return(
-            <div style={{ "bottom": -1 }} className="foot">
-                footStyle
+            <div >
+                <div style={{ "bottom": -3 }} className="foot">
+                    <div>主页</div>
+                    <div>消息</div>
+                    <div>热门</div>
+                </div>
                 <div className="qiuqiu"></div>
             </div>
         )
