@@ -2,10 +2,18 @@ import jsonp from './../base/jsonp'
 import axios from 'axios'
 // 获取当前登录用户及其所关注（授权）用户的最新微博
 // http://open.weibo.com/wiki/2/statuses/home_timeline
-export function getNewWeiBo(ass) {
-  const url = 'https://api.weibo.com/2/statuses/home_timeline.json'
-  const data = {
-    access_token: ass
+export function getNewWeiBo(ass,page) {
+  const url = 'https://api.weibo.com/2/statuses/home_timeline.json';
+  let data = {};
+  if(page) {
+    data = {
+      access_token: ass,
+      page
+    }
+  } else {
+    data = {
+      access_token: ass
+    }
   }
   return jsonp(url, data)
 }
