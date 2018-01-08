@@ -28,10 +28,10 @@ class App extends Component {
     return (
       <div style={{marginTop: 50}}>
         <Head />
-        <Scroll pullUpEvent={this.handleEvent.bind(this)}>
+        {/* <Scroll pullUpEvent={this.handleEvent.bind(this)}>
         <div style={{width: '100%', height: 3000}}></div>
-        </Scroll>
-        {/* <WeiboList /> */}
+        </Scroll> */}
+        <WeiboList />
         <Foot />
       </div>
     );

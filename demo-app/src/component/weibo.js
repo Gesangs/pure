@@ -46,8 +46,11 @@ class ListImg extends Component {
   checkLongImg(url) {
     const img = new Image()
     img.src = url;
-    if(img.height > (img.width*2)) return url.replace(/thumbnail/, "large");
-    else return url
+    if(img.height > (img.width*2)) {
+      return url.replace(/thumbnail/, "large");
+    } else {
+      return url
+    }
   }
   render() {
     const imgs = this.props.imgs;

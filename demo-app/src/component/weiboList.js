@@ -12,12 +12,12 @@ class WeiboList extends Component {
     this.state = {
       access_token,
       weiboList: [],
-      page: 1,
+      page: 2,
       Emotion:[]
     };
   }
 
-  componentDidMount() {
+  componentWillMount() {
     this._getNewWeiBo();
     getEmotions(this.state.access_token).then((res) => {
       this.setState({
@@ -26,11 +26,21 @@ class WeiboList extends Component {
     })
   }
   _getNewWeiBo(){
-    getNewWeiBo(this.state.access_token).then(res => {
+    getNewWeiBo(this.state.access_token, 1).then(res => {
       console.log(res.data.statuses);
       this.setState({
         weiboList: this._handleWeiboList(res.data.statuses)
       });
+    });
+  }
+  _getMoreWeiBo() {
+    getNewWeiBo(this.state.access_token, this.state.page).then(res => {
+      const weiboList = this._handleWeiboList(res.data.statuses)
+      this.setState({
+        weiboList: [...this.state.weiboList, ...weiboList],
+        page: this.state.page + 1
+      });
+      console.log(this.state.weiboList)
     });
   }
   _handleWeiboList(weibos) {
@@ -48,7 +58,8 @@ class WeiboList extends Component {
     const Emotion = this.state.Emotion;
     return (
       <div className="weiboList">
-        <Scroll pullUpEvent={this._getNewWeiBo.bind(this)}>
+        <Scroll onPullDownRefresh={this._getNewWeiBo.bind(this)}
+                onReachBottom={this._getMoreWeiBo.bind(this)}>
           {weiboList.map((item, index) => <Weibo weibo={item} Emotion={Emotion} key={index} />)}
         </Scroll>
       </div>
