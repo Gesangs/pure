@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Logout } from "./api/user";
 import { scrollDisplay } from './utils/pullToRefresh'
 import WeiboList from "./component/weiboList";
 import Scroll from "./containers/scroll"
@@ -9,27 +8,28 @@ import Foot from "./component/Foot"
 class App extends Component {
   constructor() {
     super();
-    
+    this.state = {
+      height: 3000,
+    }
   }
   componentDidMount() {
     scrollDisplay();
   }
-  
-  _logout() {
-    Logout(this.state.access_token).then(res => {
-      console.log(res);
-    });
-    localStorage.removeItem("access_token");
-  }
-  handleEvent(){
+  handleUpEvent(){
     console.log("ssss");
+  }
+  handleBottomEvent(){
+    this.setState({
+      height: this.state.height + 3000,
+    })
   }
   render() {
     return (
       <div style={{marginTop: 50}}>
         <Head />
-        {/* <Scroll pullUpEvent={this.handleEvent.bind(this)}>
-        <div style={{width: '100%', height: 3000}}></div>
+        {/* <Scroll onPullDownRefresh={this.handleUpEvent.bind(this)}
+                onReachBottom={this.handleBottomEvent.bind(this)}>
+        <div style={{width: '100%', height: this.state.height}}></div>
         </Scroll> */}
         <WeiboList />
         <Foot />

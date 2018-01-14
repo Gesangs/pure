@@ -4,13 +4,11 @@ import { handleWeibo } from "../base/class/weibo";
 import Scroll from '../containers/scroll'
 import "../style/weiboList.css";
 import Weibo from "./weibo";
-import { Key, access_token } from "../config";
 
 class WeiboList extends Component {
   constructor() {
     super();
     this.state = {
-      access_token,
       weiboList: [],
       page: 2,
       Emotion:[]
@@ -19,14 +17,18 @@ class WeiboList extends Component {
 
   componentWillMount() {
     this._getNewWeiBo();
-    getEmotions(this.state.access_token).then((res) => {
+    getEmotions().then((res) => {
       this.setState({
         Emotion: res.data
       })
     })
   }
+  componentDidMount() {
+    this.refs.scroll._getRefreshHeight()
+  }
+  
   _getNewWeiBo(){
-    getNewWeiBo(this.state.access_token, 1).then(res => {
+    getNewWeiBo().then(res => {
       console.log(res.data.statuses);
       this.setState({
         weiboList: this._handleWeiboList(res.data.statuses)
@@ -34,7 +36,7 @@ class WeiboList extends Component {
     });
   }
   _getMoreWeiBo() {
-    getNewWeiBo(this.state.access_token, this.state.page).then(res => {
+    getNewWeiBo(this.state.page).then(res => {
       const weiboList = this._handleWeiboList(res.data.statuses)
       this.setState({
         weiboList: [...this.state.weiboList, ...weiboList],
@@ -59,7 +61,8 @@ class WeiboList extends Component {
     return (
       <div className="weiboList">
         <Scroll onPullDownRefresh={this._getNewWeiBo.bind(this)}
-                onReachBottom={this._getMoreWeiBo.bind(this)}>
+                onReachBottom={this._getMoreWeiBo.bind(this)}
+                ref="scroll">
           {weiboList.map((item, index) => <Weibo weibo={item} Emotion={Emotion} key={index} />)}
         </Scroll>
       </div>

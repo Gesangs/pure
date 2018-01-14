@@ -38,20 +38,11 @@ class ListImg extends Component {
       isFull: false
     };
   }
-  toggleFull() {
-    this.setState({
-      isFull: !this.state.isFull
-    });
-  }
-  checkLongImg(url) {
-    const img = new Image()
-    img.src = url;
-    if(img.height > (img.width*2)) {
-      return url.replace(/thumbnail/, "large");
-    } else {
-      return url
-    }
-  }
+  // toggleFull() {
+  //   this.setState({
+  //     isFull: !this.state.isFull
+  //   });
+  // }
   render() {
     const imgs = this.props.imgs;
     return (
@@ -61,16 +52,16 @@ class ListImg extends Component {
             <div
               className="weiboImg"
               key={index}
-              style={{ backgroundImage: `url(${this.checkLongImg(item.thumbnail_pic)})` }}
-              onClick={this.toggleFull.bind(this)}
+              style={{ backgroundImage: `url(${item.thumbnail_pic})` }}
+              // onClick={this.toggleFull.bind(this)}
             />
           );
         })}
-        {this.state.isFull ? (
+        {/* {this.state.isFull ? (
           <ImageZoom imgs={imgs} toggle={this.toggleFull.bind(this)} />
         ) : (
           ""
-        )}
+        )} */}
       </div>
     );
   }
@@ -123,12 +114,12 @@ class ListContent extends Component {
         {content.map((item, index) => {
           return (
             <span key={index}>
-              {item[0] === "user" ? <a>{item[1]}</a> : ""}
-              {item[0] === "all" ? <a>{item[1]}</a> : ""}
-              {item[0] === "icon" ? <img src={item[1]} /> : ""}
-              {item[0] === "text" ? <span>{item[1]}</span> : ""}
-              {item[0] === "topic" ? <a>{item[1]}</a> : ""}
-              {item[0] === "url" ? <a href={item[1]}> 查看原链接</a> : ""}
+              {item[0] === "user" ? <a>{item[1]}</a> : " "}
+              {item[0] === "all" ? <a>{item[1]}</a> : " "}
+              {item[0] === "icon" ? <img src={item[1]} /> : " "}
+              {item[0] === "text" ? <span>{item[1]}</span> : " "}
+              {item[0] === "topic" ? <a>{item[1]}</a> : " "}
+              {item[0] === "url" ? <a href={item[1]}> 查看原链接</a> : " "}
             </span>
           );
         })}
