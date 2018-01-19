@@ -8,7 +8,7 @@ class Head extends Component {
     return (
       <div>
         <div style={{ top: 0 }} className="head">
-          <div>菜单</div>
+          <div>用户</div>
           <div>全部微博</div>
         </div>
       </div>

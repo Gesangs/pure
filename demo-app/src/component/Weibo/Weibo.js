@@ -14,9 +14,9 @@ class Weibo extends Component {
     return (
       <div className="list">
         <div className="listHead">
-          <img src={weibo.head_pic} className="listPic" />
+          <img src={weibo.user.head_pic} className="listPic" />
           <div className="listNameS">
-            <div className="listName">{weibo.name}</div>
+            <div className="listName">{weibo.user.name}</div>
             <div className="listSource">
               {weibo.time}
               {weibo.source ? "  来自  " : ""}
@@ -33,7 +33,7 @@ class Weibo extends Component {
           <div className="retWeibo">
             <div className="retContent">
               <div>
-                <a>{weibo.retweeted_status.name}</a>:{" "}
+                <a>@{weibo.retweeted_status.user.name}</a>:{" "}
                 <Content
                   con={weibo.retweeted_status.content}
                   Emotion={Emotion}

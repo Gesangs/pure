@@ -27,7 +27,7 @@ class Content extends Component {
             nodes.push(["topic", matchArr[5]]);
             break;
           case "icon":
-            nodes.push(["icon", this.getEmotion(matchArr[5])]);
+            nodes.push(["icon", matchArr[5], this.getEmotion(matchArr[5])]);
             break;
           case "url":
             nodes.push(["url", matchArr[5]]);
@@ -51,7 +51,7 @@ class Content extends Component {
                 ) : item[0] === "all" ? (
                   <a>{item[1]}</a>
                 ) : item[0] === "icon" ? (
-                  <img src={item[1]} style={{ width: 18, height: 18 }} />
+                  <img alt={item[1]} src={item[2]} style={{ width: 18, height: 18 }} />
                 ) : item[0] === "text" ? (
                   item[1]
                 ) : item[0] === "topic" ? (

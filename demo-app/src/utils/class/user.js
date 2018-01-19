@@ -33,7 +33,7 @@ export function handleUser(user) {
     name: user.screen_name,
     gender: user.gender,
     create_time: user.created_at,
-    head_pic: user.avatar_large,
+    head_pic: user.profile_image_url,
     pic_urls: user.cover_image_phone,
     followers_count:user.followers_count,
     friends_count:user.friends_count,

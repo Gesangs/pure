@@ -8,7 +8,8 @@ export function getNewWeiBo(page = 1) {
 
   const  data = {
       access_token,
-      page
+      page,
+      count:30
     }
   
   return jsonp(url, data)
@@ -17,10 +18,11 @@ export function getNewWeiBo(page = 1) {
 
 // 获取某个用户最新发表的微博列表
 // http://open.weibo.com/wiki/2/statuses/user_timeline
-export function getUserWeiBo() {
+export function getUserWeiBo(uid) {
   const url = 'https://api.weibo.com/2/statuses/user_timeline.json'
   const data = {
-    access_token
+    access_token,
+    uid
   }
   return jsonp(url, data)
 }

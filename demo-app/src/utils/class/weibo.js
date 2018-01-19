@@ -1,38 +1,26 @@
 import { format } from "../date-utils";
-
+import { handleUser } from "./user"
 export default class Weibo {
   constructor({
     id,
-    userId,
+    user,
     mid,
-    name,
     time,
-    head_pic,
-    // 来自
-    source,
+    source, // 来自
     content,
-    short_urls,
     pic_urls,
-    // 是否收藏
-    favorited,
-    // 转发数
-    reposts_count,
-    // 评论数
-    comments_count,
-    // 点赞数
-    attitudes_count,
-    // 被转发的原微博
-    retweeted_status
+    favorited, // 是否收藏
+    reposts_count, // 转发数
+    comments_count, // 评论数
+    attitudes_count, // 点赞数
+    retweeted_status // 被转发的原微博
   }) {
     this.id = id;
-    this.userId = userId;
+    this.user = user;
     this.mid = mid;
-    this.name = name;
     this.time = time;
-    this.head_pic = head_pic;
     this.source = source;
     this.content = content;
-    this.short_urls = short_urls;
     this.pic_urls = pic_urls;
     this.favorited = favorited;
     this.reposts_count = reposts_count;
@@ -47,7 +35,7 @@ function handleRetWeibo(weibo) {
     id: weibo.id,
     content: handleContent(weibo.text),
     pic_urls: weibo.pic_urls,
-    name: `@${weibo.user.screen_name}`,
+    user: handleUser(weibo.user),
     reposts_count: `转发${weibo.reposts_count}`,
     comments_count: `评论${weibo.comments_count}`,
     attitudes_count: `点赞${weibo.attitudes_count}`
@@ -58,7 +46,6 @@ function handleRetWeibo(weibo) {
 // .replace(/\u200B/g,'')
 // .match(/(http:\/\/t.cn\/\w+)/g)[0]
 function handleContent(text) {
-  // const audioUrl = handleUrl(text.match(/(http:\/\/t.cn\/\w+)/g))
   text = text
     .replace(/(@[^\s|\/|:|：|@|，|。]+)/g, "<user>$1</user>")
     .replace(/\[([^\[\]]+)\]/g, "<icon>[$1]</icon>")
@@ -73,13 +60,10 @@ export function handleWeibo(weibo) {
   return new Weibo({
     id: weibo.id,
     mid: weibo.mid,
-    name: weibo.user.screen_name,
-    userId: weibo.user.id,
+    user: handleUser(weibo.user),
     time: format(weibo.created_at),
-    head_pic: weibo.user.profile_image_url,
     source: weibo.source.replace(/<[^>]+>/g, ""),
     content: handleContent(weibo.text),
-    short_urls: weibo.text.match(/(http:\/\/t.cn\/\w+)/g) || [],
     pic_urls: weibo.pic_urls,
     favorited: weibo.favorited,
     reposts_count: weibo.reposts_count,
@@ -89,4 +73,14 @@ export function handleWeibo(weibo) {
       ? handleRetWeibo(weibo.retweeted_status)
       : ""
   });
+}
+
+export function handleWeiboList(weibos) {
+  weibos = weibos || [];
+  const List = [];
+  weibos.forEach((item, index) => {
+    const weibo = handleWeibo(item);
+    List.push(weibo);
+  });
+  return List;
 }

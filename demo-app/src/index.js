@@ -1,12 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { createStore } from "redux";
 import { Provider } from "react-redux";
 import { Key, access_token,  reUri } from "./config/config.js";
-import App from "./containers/index";
 import axios from "axios";
 import configureStore from './store/configureStore'
 import registerServiceWorker from "./registerServiceWorker";
+import { HashRouter } from 'react-keeper';
+import RouterMap from "./router/routerMap"
+
 
 const store = configureStore()
 
@@ -30,7 +31,9 @@ function _getShouquan() {
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <HashRouter>
+      <RouterMap />
+    </HashRouter>
   </Provider>,
   document.getElementById("root")
 );

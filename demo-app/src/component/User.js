@@ -1,15 +1,7 @@
 import React, { Component } from "react";
-import { getUserUid, getUserMsgByUid } from "../api/user";
-import { connect } from 'react-redux'
 class User extends Component {
     constructor() {
         super()
-        this.state = {
-            user: {}
-        }
-    }
-    componentDidMount() {
-        
     }
     render() {
         const userinfo = this.props.userinfo;
@@ -32,3 +24,5 @@ class User extends Component {
         )
     }
 }
+
+export default User
