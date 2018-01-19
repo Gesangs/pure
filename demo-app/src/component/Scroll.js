@@ -13,21 +13,19 @@ class Scroll extends Component {
   }
   _getRefreshHeight() {
     const windowInnerHeight = window.innerHeight || document.documentElement.clientHeight;
-    let timer;
-    clearTimeout(timer);
-    timer = setTimeout(() => {
+    clearTimeout(this.timer);
+    this.timer = setTimeout(() => {
       let containerHeight = window.getComputedStyle(this.refs.container).height;
       this.setState({
-        refreshHeight: parseInt(containerHeight.replace(/px/, '') - windowInnerHeight)
+        refreshHeight: Number.parseInt(containerHeight.replace(/px/, '') - windowInnerHeight)
       })
       console.log(this.state.refreshHeight)
     },500)
   }
    // 下拉刷新
   _onPullDownRefresh() {
-    let timer;
-    clearTimeout(timer);
-    timer = setTimeout(() => {
+    clearTimeout(this.timer);
+    this.timer = setTimeout(() => {
         this.props.onPullDownRefresh();
         this._getRefreshHeight();
         this.refs.refresh.style.transform = `translate3d(-50%,-120px,0)`;
@@ -44,8 +42,8 @@ class Scroll extends Component {
     if (this.state.deltaY > 110) this.state.deltaY = 110;
     if (this.state.deltaY > 20 && window.scrollY === 0) {
       this.refs.refresh.style.transform = `translate3d(-50%,${this.state.deltaY -
-        40}px,0)`;
-      this.refs.refresh.style.transition = `all 0.2s ease`;
+        30}px,0)`;
+      this.refs.refresh.style.transition = `all 0s ease`;
     }
     if(this.state.deltaY >= 90 && window.scrollY === 0) this._onPullDownRefresh();
   }
@@ -64,13 +62,12 @@ class Scroll extends Component {
     if (this.state.deltaY !== 110) {
       this.refs.refresh.style.transform = `translate3d(-50%,-120px,0)`; 
     }
-    const isGetMore = Math.max(Number.parseInt(window.scrollY), Number.parseInt(this.state.refreshHeight)) == Number.parseInt(window.scrollY)
+    const isGetMore = Math.max(Number.parseInt(window.scrollY), Number.parseInt(this.state.refreshHeight)) === Number.parseInt(window.scrollY)
     if (isGetMore) {
       this.setState({ refreshHeight: this.state.refreshHeight + 20000 })
       this.props.onReachBottom()
       this._getRefreshHeight()
     }
-    console.log(window.scrollY)
   }
   render() {
     return ( 

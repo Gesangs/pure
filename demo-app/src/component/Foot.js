@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Logout } from "../api/user";
-import { Key, access_token, reUri } from "../config"
+import { Key, access_token, reUri } from "../config/config"
 import '../style/headFoot.css'
 
 class Foot extends Component {
@@ -9,10 +9,10 @@ class Foot extends Component {
     }
     _logout() {
         Logout().then((res) => {
+          localStorage.removeItem("access_token");
           console.log(res);
+          window.location.href = `https://api.weibo.com/oauth2/authorize?client_id=${Key}&response_type=code&redirect_uri=${reUri}`;
         });
-        window.location.href = `https://api.weibo.com/oauth2/authorize?client_id=${Key}&response_type=code&redirect_uri=${reUri}`;
-        localStorage.removeItem("access_token");
       }
     render() {
         return(

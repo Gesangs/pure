@@ -1,13 +1,24 @@
-import jsonp from './../base/jsonp'
-import { access_token } from "../config"
+import jsonp from './jsonp'
+import { access_token } from "../config/config"
 
-// 根据用户ID获取用户信息
-// https://api.weibo.com/2/users/show.json
-export function getUserMag(id) {
-    const url = 'https://api.weibo.com/2/statuses/home_timeline.json'
+// 根据access_token获取用户uid
+// http://open.weibo.com/wiki/2/account/get_uid
+export function getUserUid() {
+  const url = 'https://api.weibo.com/2/account/get_uid.json'
+  const data = {
+    access_token,
+  }
+  return jsonp(url, data)
+}
+
+
+// 根据用户Uid/screen_name获取用户信息
+// http://open.weibo.com/wiki/2/users/show
+export function getUserMsgByUid(uid) {
+    const url = 'https://api.weibo.com/2/users/show.json'
     const data = {
       access_token,
-      id
+      uid
     }
     return jsonp(url, data)
   }

@@ -1,10 +1,9 @@
-import { format } from "../../utils/date-utils";
-import { shortToLong } from "../../api/weibo";
-import { access_token } from "../../config";
+import { format } from "../date-utils";
 
 export default class Weibo {
   constructor({
     id,
+    userId,
     mid,
     name,
     time,
@@ -26,6 +25,7 @@ export default class Weibo {
     retweeted_status
   }) {
     this.id = id;
+    this.userId = userId;
     this.mid = mid;
     this.name = name;
     this.time = time;
@@ -74,6 +74,7 @@ export function handleWeibo(weibo) {
     id: weibo.id,
     mid: weibo.mid,
     name: weibo.user.screen_name,
+    userId: weibo.user.id,
     time: format(weibo.created_at),
     head_pic: weibo.user.profile_image_url,
     source: weibo.source.replace(/<[^>]+>/g, ""),
