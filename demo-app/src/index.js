@@ -5,10 +5,8 @@ import { Key, access_token,  reUri } from "./config/config.js";
 import axios from "axios";
 import configureStore from './store/configureStore'
 import registerServiceWorker from "./registerServiceWorker";
-import { HashRouter } from 'react-keeper';
 import RouterMap from "./router/routerMap"
-
-
+import { HashRouter } from 'react-router-dom'
 const store = configureStore()
 
 const Code = window.location.href.split("=")[1];
@@ -31,8 +29,8 @@ function _getShouquan() {
 
 ReactDOM.render(
   <Provider store={store}>
-    <HashRouter>
-      <RouterMap />
+  <HashRouter>
+    <RouterMap />
     </HashRouter>
   </Provider>,
   document.getElementById("root")

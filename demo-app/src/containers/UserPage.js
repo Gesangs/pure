@@ -1,8 +1,9 @@
 import React, { Component } from "react";
+import ReactDOM from "react-dom";
 import { connect } from 'react-redux'
 import { getUserWeiBo } from "../api/weibo"
 import { handleWeiboList } from "../utils/class/weibo"
-import User from "../component/User"
+import User from "../component/User/User"
 import WeiboList from "./WeiboList";
 
 
@@ -10,28 +11,23 @@ class UserPage extends Component {
     constructor() {
         super()
         this.state = {
-            weiboList: [],
-            userinfo: {}
+            weiboList: []
         }
     }
     componentDidMount() {
-        const uid = this.state.userinfo.id
-        getUserWeiBo("5646024554").then(res => {
+        const uid = this.props.userinfo.userinfo.id
+        getUserWeiBo(uid).then(res => {
             this.setState({
                 weiboList: handleWeiboList(res.data.statuses)
             });
-            console.log(this.state.weiboList);
         });
-        this.setState({
-            userinfo: this.props.userinfo.userinfo
-        })
-        console.log(this.state.userinfo)
     }
     render() {
-        const { userinfo, weiboList } = this.state;
+        const { weiboList } = this.state;
+        const { userinfo } = this.props.userinfo
         return(
             <div>
-                {/* <User userinfo={userinfo} /> */}
+                <User userinfo={ userinfo } />
                 <WeiboList weiboList={weiboList} />
             </div>
         )

@@ -8,10 +8,11 @@ import Scroll from "../component/scroll/Scroll";
 import Head from "../component/Head";
 import Foot from "../component/Foot";
 import Home from "../containers/Home";
+import UserPage from "../containers/UserPage";
 import * as emotionActionsFromOtherFile from "../action/emotion";
 import * as userinfoActionsFromOtherFile from "../action/userinfo";
 
-class App extends Component {
+class Index extends Component {
   constructor() {
     super();
   }
@@ -50,4 +51,4 @@ function mapDispatchToProps(dispatch) {
     userinfoActions: bindActionCreators(userinfoActionsFromOtherFile, dispatch)
   };
 }
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(Index);
