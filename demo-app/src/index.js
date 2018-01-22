@@ -6,7 +6,7 @@ import axios from "axios";
 import configureStore from './store/configureStore'
 import registerServiceWorker from "./registerServiceWorker";
 import RouterMap from "./router/routerMap"
-import { HashRouter } from 'react-router-dom'
+import { BrowserRouter  } from 'react-router-dom'
 const store = configureStore()
 
 const Code = window.location.href.split("=")[1];
@@ -29,9 +29,9 @@ function _getShouquan() {
 
 ReactDOM.render(
   <Provider store={store}>
-  <HashRouter>
+  <BrowserRouter >
     <RouterMap />
-    </HashRouter>
+    </BrowserRouter >
   </Provider>,
   document.getElementById("root")
 );

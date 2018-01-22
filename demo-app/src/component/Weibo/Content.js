@@ -1,10 +1,12 @@
 import React, { Component } from "react";
+import { connect } from 'react-redux'
 class Content extends Component {
     constructor() {
       super();
     }
     getEmotion(key) {
-      const value = this.props.Emotion.find(function(item, index, arr) {
+      const Emotion = this.props.emotion.emotion;
+      const value = Emotion.find(function(item, index, arr) {
         return item.value === key;
       });
       if (!value) return;
@@ -27,7 +29,7 @@ class Content extends Component {
             nodes.push(["topic", matchArr[5]]);
             break;
           case "icon":
-            nodes.push(["icon", matchArr[5], this.getEmotion(matchArr[5])]);
+            nodes.push(["icon",matchArr[5], this.getEmotion(matchArr[5])]);
             break;
           case "url":
             nodes.push(["url", matchArr[5]]);
@@ -67,4 +69,17 @@ class Content extends Component {
     }
   }
 
-  export default Content;
+  function mapStateToProps(state) {
+    return {
+      emotion: state.emotion
+    }
+  }
+  
+  function mapDispatchToProps(dispatch) {
+    return {
+    }
+  }
+  export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(Content)

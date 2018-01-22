@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import ListImg  from "./ListImg";
 import Content from "./Content";
+import { Link } from "react-router-dom"
 import "./weibo.css";
 
 
@@ -8,15 +9,20 @@ class Weibo extends Component {
   constructor() {
     super();
   }
-
+  goToComment(id) {
+    this.props.history.push(`/detail/${id}`);
+    // onClick={this.goToComment.bind(this, weibo.id)}
+  }
   render() {
-    const { weibo, Emotion } = this.props;
+    const { weibo } = this.props;
     return (
       <div className="list">
         <div className="listHead">
-          <img src={weibo.user.head_pic} className="listPic" />
+          <Link to={"/detail/" + weibo.id }>
+          <img src={weibo.head_pic} className="listPic" />
+          </Link>
           <div className="listNameS">
-            <div className="listName">{weibo.user.name}</div>
+            <div className="listName">{weibo.name}</div>
             <div className="listSource">
               {weibo.time}
               {weibo.source ? "  来自  " : ""}
@@ -25,7 +31,7 @@ class Weibo extends Component {
           </div>
         </div>
         <div className="listContent">
-          <Content con={weibo.content} Emotion={Emotion} />
+          <Content con={weibo.content} />
           {weibo.pic_urls.length ? <ListImg imgs={weibo.pic_urls} /> : ""}
         </div>
         {/* 转发的微博 */}
@@ -33,11 +39,8 @@ class Weibo extends Component {
           <div className="retWeibo">
             <div className="retContent">
               <div>
-                <a>@{weibo.retweeted_status.user.name}</a>:{" "}
-                <Content
-                  con={weibo.retweeted_status.content}
-                  Emotion={Emotion}
-                />
+                <a>@{weibo.retweeted_status.name}</a>:{" "}
+                <Content con={weibo.retweeted_status.content} />
               </div>
               {weibo.retweeted_status.pic_urls.length ? (
                 <ListImg imgs={weibo.retweeted_status.pic_urls} />

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { connect } from 'react-redux'
+
 import Weibo from "../component/Weibo/Weibo";
 
 class WeiboList extends Component{
@@ -11,24 +11,11 @@ class WeiboList extends Component{
     return(
       <div style={{ paddingTop: 1}}>
         {weiboList.map((item, index) => (
-          <Weibo weibo={item} key={index} Emotion={this.props.emotion.emotion} />
+          <Weibo weibo={item} key={index} />
         ))}
       </div>
     )
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    emotion: state.emotion
-  }
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-  }
-}
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(WeiboList)
+export default WeiboList

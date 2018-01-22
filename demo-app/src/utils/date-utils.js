@@ -13,16 +13,13 @@ function getDateDiff(dateTimeStamp) {
   if (diffValue < 0) {
     return;
   }
-  let monthC = diffValue / month;
-  let weekC = diffValue / (7 * day);
+ 
   let dayC = diffValue / day;
   let hourC = diffValue / hour;
   let minC = diffValue / minute;
   let result = "";
-  if (monthC >= 1) {
-    result = "" + parseInt(monthC) + "月前";
-  } else if (weekC >= 1) {
-    result = "" + parseInt(weekC) + "周前";
+  if (dayC >= 7) {
+    result = `${dateTimeStamp.getFullYear()}-${dateTimeStamp.getMonth() + 1}-${dateTimeStamp.getDate()}`;
   } else if (dayC >= 1) {
     result = "" + parseInt(dayC) + "天前";
   } else if (hourC >= 1) {

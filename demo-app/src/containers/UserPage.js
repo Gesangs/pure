@@ -1,50 +1,41 @@
 import React, { Component } from "react";
-import ReactDOM from "react-dom";
-import { connect } from 'react-redux'
-import { getUserWeiBo } from "../api/weibo"
-import { handleWeiboList } from "../utils/class/weibo"
-import User from "../component/User/User"
-import WeiboList from "./WeiboList";
-
+import { getUserWeiBo } from "../api/weibo";
+import { getUserMsgByUid } from "../api/user";
+import { handleWeiboList } from "../utils/class/weibo";
+import { handleUser } from "../utils/class/user";
+import User from "../component/User/User";
+import WeiboList from "../component/WeiboList";
 
 class UserPage extends Component {
-    constructor() {
-        super()
-        this.state = {
-            weiboList: []
-        }
-    }
-    componentDidMount() {
-        const uid = this.props.userinfo.userinfo.id
-        getUserWeiBo(uid).then(res => {
-            this.setState({
-                weiboList: handleWeiboList(res.data.statuses)
-            });
-        });
-    }
-    render() {
-        const { weiboList } = this.state;
-        const { userinfo } = this.props.userinfo
-        return(
-            <div>
-                <User userinfo={ userinfo } />
-                <WeiboList weiboList={weiboList} />
-            </div>
-        )
-    }
+  constructor() {
+    super();
+    this.state = {
+      weiboList: [],
+      userinfo: {}
+    };
+  }
+  componentDidMount() {
+    const uid = this.props.match.params.id;
+    getUserMsgByUid(uid).then(res => {
+      this.setState({
+        userinfo: handleUser(res.data)
+      });
+    });
+    getUserWeiBo(uid).then(res => {
+      this.setState({
+        weiboList: handleWeiboList(res.data.statuses)
+      });
+    });
+  }
+  render() {
+    const { weiboList, userinfo } = this.state;
+    return (
+      <div>
+        <User userinfo={userinfo} />
+        <WeiboList weiboList={weiboList} />
+      </div>
+    );
+  }
 }
 
-function mapStateToProps(state) {
-    return {
-      userinfo: state.userinfo
-    }
-  }
-  
-  function mapDispatchToProps(dispatch) {
-    return {
-    }
-  }
-  export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(UserPage)
+export default UserPage;

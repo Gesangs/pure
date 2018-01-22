@@ -3,7 +3,7 @@ import { getNewWeiBo } from "../api/weibo";
 import { handleWeiboList } from "../utils/class/weibo";
 
 import Scroll from "../component/scroll/Scroll";
-import WeiboList from "./WeiboList";
+import WeiboList from "../component/WeiboList";
 
 class Home extends Component {
   constructor() {
@@ -46,7 +46,7 @@ class Home extends Component {
           onReachBottom={this._getMoreWeiBo.bind(this)}
           ref="scroll"
         >
-          <WeiboList weiboList={weiboList}></WeiboList>
+          <WeiboList weiboList={weiboList} />
         </Scroll>
       </div>
     );

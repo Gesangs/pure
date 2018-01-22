@@ -21,12 +21,10 @@ class Index extends Component {
       this.props.emotionActions.update({
         emotion: res.data
       });
-      getUserUid().then(res => {
-        getUserMsgByUid(res.data.uid).then(res => {
-          this.props.userinfoActions.update({
-            userinfo: handleUser(res.data)
-          });
-        });
+    });
+    getUserUid().then(res => {
+      this.props.userinfoActions.update({
+        userId: res.data.uid
       });
     });
   }
