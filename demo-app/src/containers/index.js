@@ -30,7 +30,7 @@ class Index extends Component {
   }
   render() {
     return (
-      <div style={{ marginTop: 50 }}>
+      <div style={{ marginTop: 50 }} className="Index">
         <Head />
         <Home />
         <Foot />

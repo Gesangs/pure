@@ -1,18 +1,25 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux'
-import { Link } from "react-router-dom";
+import { Control } from "react-keeper";
+// import { Link,  } from "react-keeper";
 import "../style/headFoot.css";
 class Head extends Component {
   constructor() {
     super();
   }
+  goToUser(id) {
+      Control.go(`/user/${id}`)
+      setTimeout(() => {
+        document.getElementsByClassName("Index")[0].style.display = 'none';
+      },200)
+  }
   render() {
     return (
       <div>
         <div style={{ top: 0 }} className="head">
-          <Link component="div" to={`/user/${this.props.userinfo.userId}`}>
+          <div onClick={this.goToUser.bind(this, this.props.userinfo.userId)}>
             用户
-          </Link>
+          </div>
           <div>全部微博</div>
         </div>
       </div>

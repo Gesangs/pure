@@ -15,7 +15,7 @@ class UserPage extends Component {
     };
   }
   componentDidMount() {
-    const uid = this.props.match.params.id;
+    const uid = this.props.params.id;
     getUserMsgByUid(uid).then(res => {
       this.setState({
         userinfo: handleUser(res.data)

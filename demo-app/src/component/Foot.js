@@ -10,8 +10,8 @@ class Foot extends Component {
     }
     _logout() {
         Logout().then((res) => {
+            console.log(res);
           localStorage.removeItem("access_token");
-          console.log(res);
           window.location.href = `https://api.weibo.com/oauth2/authorize?client_id=${Key}&response_type=code&redirect_uri=${reUri}`;
         });
       }
@@ -23,9 +23,9 @@ class Foot extends Component {
                     <div>消息</div>
                     <div>热门</div>
                 </div>
-                <Link to="/user">
-                    <div className="qiuqiu"></div>
-                </Link>
+                {/* <Link to="/user"> */}
+                    <div className="qiuqiu" onClick={this._logout.bind(this)}></div>
+                {/* </Link> */}
             </div>
         )
     }

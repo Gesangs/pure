@@ -4,12 +4,17 @@ class User extends Component {
     constructor() {
         super()
     }
+    goBack() {
+        const index = document.getElementsByClassName("Index")[0];
+    index.style.display = 'block';
+        window.history.go(-1);
+    }
     render() {
         const userinfo = this.props.userinfo;
         return(
             <div>
                 {userinfo ? <div className="UserPage">
-                <div className="headBar"></div>
+                <div className="headBar" onClick={this.goBack.bind(this)}>返回</div>
                 <div className="userHeader">
                     <div className="coverImg" style={{ backgroundImage: `url(${userinfo.pic_urls}) ` }}></div>
                     <div className="head_pic">
@@ -19,7 +24,7 @@ class User extends Component {
                     <span className="countNum">关注 { userinfo.friends_count } | 粉丝 { userinfo.followers_count }</span>
                     <span></span>
                     <div className="tabBar">
-                        <span>关于</span>
+                        <span onClick={this.goBack.bind(this)}>关于</span>
                         <span>微博({userinfo.statuses_count})</span>
                         <span>相册</span>
                     </div>

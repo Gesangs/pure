@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import ListImg  from "./ListImg";
 import Content from "./Content";
-import { Link } from "react-router-dom"
+import { stopPro } from "../../utils/stopPro"
+import { Control } from "react-keeper";
+// import { Link } from "react-router-dom"
 import "./weibo.css";
 
 
@@ -9,20 +11,24 @@ class Weibo extends Component {
   constructor() {
     super();
   }
-  goToComment(id) {
-    this.props.history.push(`/detail/${id}`);
-    // onClick={this.goToComment.bind(this, weibo.id)}
+
+  goToUser(id, e) {
+    stopPro(e)
+    Control.go(`/user/${id}`)
+    setTimeout(() => {
+      document.getElementsByClassName("Index")[0].style.display = 'none';
+    },200)
   }
   render() {
     const { weibo } = this.props;
     return (
+      // <Link className="list" onClick={stopPro} to="`/detail/${weibo.id}`">
       <div className="list">
         <div className="listHead">
-          <Link to={"/detail/" + weibo.id }>
-          <img src={weibo.head_pic} className="listPic" />
-          </Link>
+
+          <img src={weibo.head_pic} className="listPic" onClick={this.goToUser.bind(this, weibo.userId)} />
           <div className="listNameS">
-            <div className="listName">{weibo.name}</div>
+            <div className="listName" onClick={this.goToUser.bind(this, weibo.userId)}>{weibo.name}</div>
             <div className="listSource">
               {weibo.time}
               {weibo.source ? "  来自  " : ""}
@@ -39,7 +45,7 @@ class Weibo extends Component {
           <div className="retWeibo">
             <div className="retContent">
               <div>
-                <a>@{weibo.retweeted_status.name}</a>:{" "}
+                <a onClick={this.goToUser.bind(this, weibo.retweeted_status.userId)}>@{weibo.retweeted_status.name}</a>:{" "}
                 <Content con={weibo.retweeted_status.content} />
               </div>
               {weibo.retweeted_status.pic_urls.length ? (
@@ -62,6 +68,7 @@ class Weibo extends Component {
           <div>{weibo.comments_count}</div>
           <div>{weibo.attitudes_count}</div>
         </div>
+      {/* </Link> */}
       </div>
     );
   }
