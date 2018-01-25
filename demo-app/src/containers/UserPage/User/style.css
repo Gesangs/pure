@@ -32,8 +32,9 @@
 }
 .UserPage .userHeader .tabBar span {
     display: inline-block;
-    width: 80px;
+    width: 110px;
     text-align: center;
     height: 40px;
+    font-size: 14px;
     line-height: 40px;
 }

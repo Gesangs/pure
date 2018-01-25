@@ -8,7 +8,6 @@ import Scroll from "../component/scroll/Scroll";
 import Head from "../component/Head";
 import Foot from "../component/Foot";
 import Home from "../containers/Home";
-import UserPage from "../containers/UserPage";
 import * as emotionActionsFromOtherFile from "../action/emotion";
 import * as userinfoActionsFromOtherFile from "../action/userinfo";
 

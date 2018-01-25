@@ -3,7 +3,7 @@ import { handleUser } from "./user"
 export default class Weibo {
   constructor({
     id,
-    userId,
+    user,
     name,
     head_pic,
     mid,
@@ -18,7 +18,7 @@ export default class Weibo {
     retweeted_status // 被转发的原微博
   }) {
     this.id = id;
-    this.userId = userId;
+    this.user = user;
     this.name = name;
     this.head_pic = head_pic;
     this.mid = mid;
@@ -37,7 +37,7 @@ export default class Weibo {
 function handleRetWeibo(weibo) {
   return new Weibo({
     id: weibo.id,
-    userId: weibo.user.id,
+    user: weibo.user,
     name: weibo.user.screen_name,
     content: handleContent(weibo.text),
     pic_urls: weibo.pic_urls,
@@ -68,7 +68,7 @@ export function handleWeibo(weibo) {
     mid: weibo.mid,
     name: weibo.user.screen_name,
     head_pic: weibo.user.profile_image_url,
-    userId: weibo.user.id,
+    user: weibo.user,
     time: format(weibo.created_at),
     source: weibo.source.replace(/<[^>]+>/g, ""),
     content: handleContent(weibo.text),

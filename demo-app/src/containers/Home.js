@@ -23,7 +23,7 @@ class Home extends Component {
       this.setState({
         weiboList: handleWeiboList(res.data.statuses)
       });
-      console.log(this.state.weiboList);
+      console.log(res.data.statuses);
     });
   }
   _getMoreWeiBo() {

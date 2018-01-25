@@ -1,4 +1,5 @@
 
+import { numFormat } from "../num-utils"
 export default class User {
   constructor({
     id,
@@ -34,10 +35,10 @@ export function handleUser(user) {
     gender: user.gender,
     create_time: user.created_at,
     head_pic: user.profile_image_url,
-    pic_urls: user.cover_image_phone,
-    followers_count:user.followers_count,
-    friends_count:user.friends_count,
-    statuses_count:user.statuses_count,
+    pic_urls: user.cover_image || user.cover_image_phone,
+    followers_count:numFormat(user.followers_count),
+    friends_count:numFormat(user.friends_count),
+    statuses_count:numFormat(user.statuses_count),
     verified_reason:user.verified_reason,
     location:user.location
   });

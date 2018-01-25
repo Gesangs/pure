@@ -1,13 +1,15 @@
 import React, { Component } from "react";
+import { Control } from "react-keeper";
 import "./style.css"
 class User extends Component {
     constructor() {
         super()
     }
     goBack() {
-        const index = document.getElementsByClassName("Index")[0];
-    index.style.display = 'block';
-        window.history.go(-1);
+        Control.go(-1);
+        setTimeout(() => {
+            document.getElementsByClassName("Index")[0].style.display = 'block';
+          },200)
     }
     render() {
         const userinfo = this.props.userinfo;
@@ -26,7 +28,6 @@ class User extends Component {
                     <div className="tabBar">
                         <span onClick={this.goBack.bind(this)}>关于</span>
                         <span>微博({userinfo.statuses_count})</span>
-                        <span>相册</span>
                     </div>
                 </div>
                 <div style={{ backgroundColor: "rgb(240, 240, 240)",width: "100%",height:20 }}></div>

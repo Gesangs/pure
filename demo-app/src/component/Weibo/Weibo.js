@@ -12,9 +12,9 @@ class Weibo extends Component {
     super();
   }
 
-  goToUser(id, e) {
+  goToUser(user, e) {
     stopPro(e)
-    Control.go(`/user/${id}`)
+    Control.go(`/user/${user.id}`, { user })
     setTimeout(() => {
       document.getElementsByClassName("Index")[0].style.display = 'none';
     },200)
@@ -26,9 +26,9 @@ class Weibo extends Component {
       <div className="list">
         <div className="listHead">
 
-          <img src={weibo.head_pic} className="listPic" onClick={this.goToUser.bind(this, weibo.userId)} />
+          <img src={weibo.head_pic} className="listPic" onClick={this.goToUser.bind(this, weibo.user)} />
           <div className="listNameS">
-            <div className="listName" onClick={this.goToUser.bind(this, weibo.userId)}>{weibo.name}</div>
+            <div className="listName" onClick={this.goToUser.bind(this, weibo.user)}>{weibo.name}</div>
             <div className="listSource">
               {weibo.time}
               {weibo.source ? "  来自  " : ""}
@@ -45,7 +45,7 @@ class Weibo extends Component {
           <div className="retWeibo">
             <div className="retContent">
               <div>
-                <a onClick={this.goToUser.bind(this, weibo.retweeted_status.userId)}>@{weibo.retweeted_status.name}</a>:{" "}
+                <a onClick={this.goToUser.bind(this, weibo.retweeted_status.user)}>@{weibo.retweeted_status.name}</a>:{" "}
                 <Content con={weibo.retweeted_status.content} />
               </div>
               {weibo.retweeted_status.pic_urls.length ? (

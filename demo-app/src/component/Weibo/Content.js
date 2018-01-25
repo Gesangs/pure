@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { stopPro } from "../../utils/stopPro"
+import { Control } from "react-keeper";
 import { connect } from 'react-redux'
 class Content extends Component {
     constructor() {
