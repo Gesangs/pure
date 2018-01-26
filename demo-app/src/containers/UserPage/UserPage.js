@@ -38,13 +38,12 @@ class UserPage extends Component {
   }
   render() {
     const { weiboList, userinfo, showList } = this.state;
-
     return (
       <div>
         <User userinfo={userinfo} />
-        {Control.state == true && showList
-         ? <WeiboList weiboList={weiboList} /> 
-         : <AboutUser userinfo={userinfo} />}
+        {Control.state && showList
+         ? <AboutUser userinfo={userinfo} /> 
+         : <WeiboList weiboList={weiboList} />}
       </div>
     );
   }

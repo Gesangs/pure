@@ -19,13 +19,18 @@ class Weibo extends Component {
       document.getElementsByClassName("Index")[0].style.display = 'none';
     },200)
   }
+  goToDetail(id, e) {
+    stopPro(e)
+    Control.go(`/detail/${id}`)
+    setTimeout(() => {
+      document.getElementsByClassName("Index")[0].style.display = 'none';
+    },200)
+  }
   render() {
     const { weibo } = this.props;
     return (
-      // <Link className="list" onClick={stopPro} to="`/detail/${weibo.id}`">
-      <div className="list">
+      <div className="list" onClick={this.goToDetail.bind(this, weibo.id)}>
         <div className="listHead">
-
           <img src={weibo.head_pic} className="listPic" onClick={this.goToUser.bind(this, weibo.user)} />
           <div className="listNameS">
             <div className="listName" onClick={this.goToUser.bind(this, weibo.user)}>{weibo.name}</div>
@@ -42,7 +47,7 @@ class Weibo extends Component {
         </div>
         {/* 转发的微博 */}
         {weibo.retweeted_status ? (
-          <div className="retWeibo">
+          <div className="retWeibo" onClick={this.goToDetail.bind(this, weibo.retweeted_status.id)}>
             <div className="retContent">
               <div>
                 <a onClick={this.goToUser.bind(this, weibo.retweeted_status.user)}>@{weibo.retweeted_status.name}</a>:{" "}
@@ -68,7 +73,6 @@ class Weibo extends Component {
           <div>{weibo.comments_count}</div>
           <div>{weibo.attitudes_count}</div>
         </div>
-      {/* </Link> */}
       </div>
     );
   }

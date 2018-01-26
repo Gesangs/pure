@@ -1,6 +1,5 @@
 
 export function numFormat(s) {
-    console.log("s")
     const str = s.toFixed(0);
     switch(str.length) {
         case 1:

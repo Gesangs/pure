@@ -50,7 +50,7 @@ function handleRetWeibo(weibo) {
 // .replace(/(@[\u4e00-\u9fa5a-zA-Z0-9_-]){4,30}/g,'<user>$1</user>')
 // .replace(/\u200B/g,'')
 // .match(/(http:\/\/t.cn\/\w+)/g)[0]
-function handleContent(text) {
+export function handleContent(text) {
   text = text
     .replace(/(@[^\s|\/|:|：|@|，|。]+)/g, "<user>$1</user>")
     .replace(/\[([^\[\]]+)\]/g, "<icon>[$1]</icon>")
