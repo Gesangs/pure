@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import { Logout } from "../api/user";
 import { Key, access_token, reUri } from "../config/config"
-import '../style/headFoot.css'
-import { Link } from "react-router-dom"
+import "./headFoot.css";
 
 class Foot extends Component {
     constructor() {
@@ -23,9 +22,7 @@ class Foot extends Component {
                     <div>消息</div>
                     <div>热门</div>
                 </div>
-                {/* <Link to="/user"> */}
-                    <div className="qiuqiu" onClick={this._logout.bind(this)}></div>
-                {/* </Link> */}
+                <div className="qiuqiu" onClick={this._logout.bind(this)}></div>
             </div>
         )
     }

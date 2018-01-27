@@ -19,9 +19,9 @@ class Weibo extends Component {
       document.getElementsByClassName("Index")[0].style.display = 'none';
     },200)
   }
-  goToDetail(id, e) {
+  goToDetail(id, weibo, e) {
     stopPro(e)
-    Control.go(`/detail/${id}`)
+    Control.go(`/detail/${id}`, { weibo })
     setTimeout(() => {
       document.getElementsByClassName("Index")[0].style.display = 'none';
     },200)
@@ -29,7 +29,7 @@ class Weibo extends Component {
   render() {
     const { weibo } = this.props;
     return (
-      <div className="list" onClick={this.goToDetail.bind(this, weibo.id)}>
+      <div className="list" onClick={this.goToDetail.bind(this, weibo.id, weibo)}>
         <div className="listHead">
           <img src={weibo.head_pic} className="listPic" onClick={this.goToUser.bind(this, weibo.user)} />
           <div className="listNameS">

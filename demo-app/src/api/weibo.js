@@ -15,6 +15,17 @@ export function getNewWeiBo(page = 1) {
   return jsonp(url, data)
 }
 
+// 根据微博ID获取单条微博内容
+// http://open.weibo.com/wiki/2/statuses/show
+export function getWeiBoDetail(id) {
+  const url = 'https://api.weibo.com/2/statuses/show.json';
+
+  const data = {
+      access_token,
+      id
+    }
+  return jsonp(url, data)
+}
 
 // 获取某个用户最新发表的微博列表
 // http://open.weibo.com/wiki/2/statuses/user_timeline

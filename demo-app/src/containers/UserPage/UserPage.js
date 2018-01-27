@@ -14,7 +14,7 @@ class UserPage extends Component {
     this.state = {
       weiboList: [],
       userinfo: {},
-      showList: true
+      showList: false
     };
   }
   componentDidMount() {
@@ -36,12 +36,17 @@ class UserPage extends Component {
       });
     }
   }
+  SwitchTab(){
+    this.setState({
+      showList: !this.state.showList
+    })
+  }
   render() {
     const { weiboList, userinfo, showList } = this.state;
     return (
       <div>
-        <User userinfo={userinfo} />
-        {Control.state && showList
+        <User userinfo={userinfo} SwitchTab={this.SwitchTab.bind(this)} />
+        { Control.state || showList
          ? <AboutUser userinfo={userinfo} /> 
          : <WeiboList weiboList={weiboList} />}
       </div>

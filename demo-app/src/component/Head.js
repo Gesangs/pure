@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux'
 import { Control } from "react-keeper";
-// import { Link,  } from "react-keeper";
-import "../style/headFoot.css";
+import "./headFoot.css";
 class Head extends Component {
   constructor() {
     super();
@@ -15,14 +14,12 @@ class Head extends Component {
   }
   render() {
     return (
-      <div>
         <div style={{ top: 0 }} className="head">
           <div onClick={this.goToUser.bind(this, this.props.userinfo.userId)}>
             用户
           </div>
           <div>全部微博</div>
         </div>
-      </div>
     );
   }
 }

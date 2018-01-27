@@ -27,11 +27,11 @@ class Home extends Component {
     });
   }
   _getMoreWeiBo() {
-    getNewWeiBo(this.state.page).then(res => {
+    let page = 2;
+    return getNewWeiBo(page++).then(res => {
       const weiboList = handleWeiboList(res.data.statuses);
       this.setState({
         weiboList: [...this.state.weiboList, ...weiboList],
-        page: this.state.page + 1
       });
       console.log(this.state.weiboList);
     });

@@ -11,6 +11,10 @@ class User extends Component {
             document.getElementsByClassName("Index")[0].style.display = 'block';
           },200)
     }
+    SwitchTab() {
+        const switchs = this.props.SwitchTab;
+        switchs()
+    }
     render() {
         const userinfo = this.props.userinfo;
         return(
@@ -26,8 +30,8 @@ class User extends Component {
                     <span className="countNum">关注 { userinfo.friends_count } | 粉丝 { userinfo.followers_count }</span>
                     <span></span>
                     <div className="tabBar">
-                        <span onClick={this.goBack.bind(this)}>关于</span>
-                        <span>微博({userinfo.statuses_count})</span>
+                        <span onClick={this.SwitchTab.bind(this)}>关于</span>
+                        <span onClick={this.SwitchTab.bind(this)}>微博({userinfo.statuses_count})</span>
                     </div>
                 </div>
                 <div style={{ backgroundColor: "rgb(240, 240, 240)",width: "100%",height:20 }}></div>
