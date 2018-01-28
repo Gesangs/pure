@@ -1,16 +1,18 @@
 import React, { Component } from "react";
+import PureRenderMixin from 'react-addons-pure-render-mixin'
 import { getUserWeiBo } from "../../api/weibo";
 import { getUserMsgByUid } from "../../api/user";
 import { handleWeiboList } from "../../utils/class/weibo";
 import { handleUser } from "../../utils/class/user";
 import { Route,Control } from "react-keeper";
-import User from "./User/User";
-import AboutUser from "./aboutUser/aboutUser"
+import User from "./User/index";
+import AboutUser from "./aboutUser/index"
 import WeiboList from "../../component/WeiboList";
 
 class UserPage extends Component {
-  constructor() {
-    super();
+  constructor(props, context) {
+    super(props, context);
+    this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
     this.state = {
       weiboList: [],
       userinfo: {},
@@ -18,18 +20,11 @@ class UserPage extends Component {
     };
   }
   componentDidMount() {
-    const uid = this.props.params.id;
-    if(Control.state) {
-      this.setState({
-        userinfo: handleUser(Control.state.user)
-      });
-    } else {
-      getUserMsgByUid(uid).then(res => {
-        this.setState({
-          userinfo: handleUser(res.data)
-        });
-      });
-      getUserWeiBo(uid).then(res => {
+    this.setState({
+      userinfo: Control.state.user
+    });
+    if(Control.state.show) {
+      getUserWeiBo(Control.state.user.id).then(res => {
         this.setState({
           weiboList: handleWeiboList(res.data.statuses) || false
         });
@@ -46,7 +41,7 @@ class UserPage extends Component {
     return (
       <div>
         <User userinfo={userinfo} SwitchTab={this.SwitchTab.bind(this)} />
-        { Control.state || showList
+        { !Control.state.show || showList
          ? <AboutUser userinfo={userinfo} /> 
          : <WeiboList weiboList={weiboList} />}
       </div>

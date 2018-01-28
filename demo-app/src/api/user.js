@@ -24,9 +24,16 @@ export function getUserMsgByUid(uid) {
   }
 
 
-  // 授权回收接口，帮助开发者主动取消用户的授权。
-  // http://open.weibo.com/wiki/Oauth2/revokeoauth2
+  // 退出登录
+  // http://open.weibo.com/wiki/2/account/end_session
   export function Logout() {
+    const url = 'https://api.weibo.com/2/account/end_session.json'
+    const data = {
+      access_token,
+    }
+    return jsonp(url, data)
+  }
+  export function Logoutt() {
     const url = 'https://api.weibo.com/oauth2/revokeoauth2'
     const data = {
       access_token,

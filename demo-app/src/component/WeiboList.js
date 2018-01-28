@@ -1,10 +1,11 @@
 import React, { Component } from "react";
-
-import Weibo from "../component/Weibo/Weibo";
+import PureRenderMixin from 'react-addons-pure-render-mixin'
+import Weibo from "../component/Weibo/index";
 
 class WeiboList extends Component{
-  constructor() {
-    super()
+  constructor(props, context) {
+    super(props, context);
+    this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
   }
   render() {
     const weiboList = this.props.weiboList;

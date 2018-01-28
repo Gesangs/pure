@@ -1,10 +1,12 @@
 import React, { Component } from "react";
+import PureRenderMixin from 'react-addons-pure-render-mixin'
 import "./style.css";
 import { scrollDisplay } from "../../utils/pullToRefresh";
 
 class Scroll extends Component {
-  constructor() {
-    super();
+  constructor(props, context) {
+    super(props, context);
+    this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
     this.state = {
       startY: 0,
       deltaY: 0

@@ -16,6 +16,10 @@ apiRoutes.get('/toLong', function(req, res) {
         res.json(body)
     })
 })
+
+apiRoutes.post('/post', function(req, res) {
+    
+})
 apiRoutes.get('/shouquan', function(req, res) {
     const Code = (req.query)['0']
     request.post(

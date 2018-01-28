@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Control } from "react-keeper";
 import "./style.css"
-class Head extends Component {
+class Foot extends Component {
     constructor() {
         super()
     }
@@ -13,14 +13,12 @@ class Head extends Component {
       }
     render() {
         return(
-            <div style={{ top: 0 }} className="detailHead">
-               <div onClick={this.goBack.bind(this)}>
-                 返回
-               </div>
-               <div>微博正文</div>
+            <div className="detailFoot">
+               <span>笔</span>
+               <div>说点什么吧...</div>
              </div>
         )
     }
 }
 
-export default Head;
+export default Foot;

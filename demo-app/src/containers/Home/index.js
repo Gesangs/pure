@@ -1,19 +1,20 @@
 import React, { Component } from "react";
-import { getNewWeiBo } from "../api/weibo";
-import { handleWeiboList } from "../utils/class/weibo";
+import PureRenderMixin from 'react-addons-pure-render-mixin'
+import { getNewWeiBo } from "../../api/weibo";
+import { handleWeiboList } from "../../utils/class/weibo";
 
-import Scroll from "../component/scroll/Scroll";
-import WeiboList from "../component/WeiboList";
+import Scroll from "../../component/scroll/index";
+import WeiboList from "../../component/WeiboList";
 
 class Home extends Component {
-  constructor() {
-    super();
+  constructor(props, context) {
+    super(props, context);
+    this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
     this.state = {
       weiboList: [],
       page: 2
     };
   }
-
   componentWillMount() {
     this._getNewWeiBo();
   }

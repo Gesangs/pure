@@ -6,16 +6,17 @@ class Head extends Component {
   constructor() {
     super();
   }
-  goToUser(id) {
-      Control.go(`/user/${id}`)
-      setTimeout(() => {
-        document.getElementsByClassName("Index")[0].style.display = 'none';
-      },200)
+  goToUser() {
+    const user = this.props.userinfo.userinfo;
+    Control.go(`/user/${user.id}`,{user, show: true})
+    setTimeout(() => {
+      document.getElementsByClassName("Index")[0].style.display = 'none';
+    },200)
   }
   render() {
     return (
         <div style={{ top: 0 }} className="head">
-          <div onClick={this.goToUser.bind(this, this.props.userinfo.userId)}>
+          <div onClick={this.goToUser.bind(this, )}>
             用户
           </div>
           <div>全部微博</div>

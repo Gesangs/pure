@@ -5,7 +5,7 @@ export const scrollDisplay = () => {
   const head = document.querySelector(".head");
   const foot = document.querySelector(".foot");
   const qiuqiu = document.querySelector(".qiuqiu");
-  window.onscroll = () => {
+  window.onscroll = function() {
     const scrollY = window.scrollY;
     // 判断滚动方向
     const direction = scrollY - currentTop;

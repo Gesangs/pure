@@ -1,19 +1,22 @@
 import React, { Component } from "react";
+import PureRenderMixin from 'react-addons-pure-render-mixin'
 import { getEmotions } from "../api/weibo";
-import { handleUser } from "../utils/class/user";
 import { getUserUid, getUserMsgByUid } from "../api/user";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import Scroll from "../component/scroll/Scroll";
-import Head from "../component/Head";
-import Foot from "../component/Foot";
-import Home from "../containers/Home";
+import Scroll from "../component/scroll/index";
+import Head from "../containers/Home/Head";
+import Foot from "../containers/Home/Foot";
+import Home from "../containers/Home/index";
+import NotFound from "../containers/404"
 import * as emotionActionsFromOtherFile from "../action/emotion";
 import * as userinfoActionsFromOtherFile from "../action/userinfo";
+import { handleUser } from "../utils/class/user";
 
 class Index extends Component {
-  constructor() {
-    super();
+  constructor(props, context) {
+    super(props, context);
+    this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
   }
   componentDidMount() {
     getEmotions().then(res => {
@@ -22,9 +25,11 @@ class Index extends Component {
       });
     });
     getUserUid().then(res => {
-      this.props.userinfoActions.update({
-        userId: res.data.uid
+      getUserMsgByUid(res.data.uid).then((res) => {
+        this.props.userinfoActions.update({
+        userinfo: handleUser(res.data) 
       });
+      })
     });
   }
   render() {

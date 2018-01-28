@@ -13,7 +13,7 @@ export default class User {
     statuses_count, // 微博数
     verified_reason, // 认证原因
     location, // 用户所在地
-    description 
+    description // 签名
   }) {
     this.id = id
     this.name = name
@@ -39,6 +39,7 @@ export function handleUser(user) {
     head_pic: user.avatar_large,
     pic_urls: handlePic(user.cover_image || user.cover_image_phone),
     friends_count:numFormat(user.friends_count),
+    followers_count:numFormat(user.followers_count),
     statuses_count:numFormat(user.statuses_count),
     verified_reason:user.verified_reason,
     location:user.location,

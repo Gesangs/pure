@@ -37,8 +37,7 @@ export default class Weibo {
 function handleRetWeibo(weibo) {
   return new Weibo({
     id: weibo.id,
-    user: weibo.user,
-    name: weibo.user.screen_name,
+    user: handleUser(weibo.user),
     content: handleContent(weibo.text),
     pic_urls: weibo.pic_urls,
     reposts_count: `转发${weibo.reposts_count}`,
@@ -66,9 +65,7 @@ export function handleWeibo(weibo) {
   return new Weibo({
     id: weibo.id,
     mid: weibo.mid,
-    name: weibo.user.screen_name,
-    head_pic: weibo.user.profile_image_url,
-    user: weibo.user,
+    user: handleUser(weibo.user),
     time: format(weibo.created_at),
     source: weibo.source.replace(/<[^>]+>/g, ""),
     content: handleContent(weibo.text),
