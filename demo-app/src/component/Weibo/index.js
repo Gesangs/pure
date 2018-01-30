@@ -4,7 +4,6 @@ import ListImg  from "./ListImg";
 import Content from "./Content";
 import { stopPro } from "../../utils/stopPro"
 import { Control } from "react-keeper";
-// import { Link } from "react-router-dom"
 import "./weibo.css";
 
 
@@ -21,9 +20,16 @@ class Weibo extends Component {
       document.getElementsByClassName("Index")[0].style.display = 'none';
     },200)
   }
-  goToDetail(id, weibo, e) {
+  goToDetail(weibo, e) {
     stopPro(e)
-    Control.go(`/detail/${id}`, { weibo })
+    Control.go(`/detail/${weibo.id}`, { weibo })
+    setTimeout(() => {
+      document.getElementsByClassName("Index")[0].style.display = 'none';
+    },200)
+  }
+  goToPost(id, e) {
+    stopPro(e)
+    Control.go(`/post`, { id })
     setTimeout(() => {
       document.getElementsByClassName("Index")[0].style.display = 'none';
     },200)
@@ -31,7 +37,7 @@ class Weibo extends Component {
   render() {
     const { weibo } = this.props;
     return (
-      <div className="list" onClick={this.goToDetail.bind(this, weibo.id, weibo)}>
+      <div className="list" onClick={this.goToDetail.bind(this, weibo)}>
         <div className="listHead">
           <img src={weibo.user.head_pic} className="listPic" onClick={this.goToUser.bind(this, weibo.user)} />
           <div className="listNameS">
@@ -49,7 +55,7 @@ class Weibo extends Component {
         </div>
         {/* 转发的微博 */}
         {weibo.retweeted_status ? (
-          <div className="retWeibo" onClick={this.goToDetail.bind(this, weibo.retweeted_status.id, weibo.retweeted_status)}>
+          <div className="retWeibo" onClick={this.goToDetail.bind(this, weibo.retweeted_status)}>
             <div className="retContent">
               <div>
                 <a onClick={this.goToUser.bind(this, weibo.retweeted_status.user)}>@{weibo.retweeted_status.user.name}</a>:{" "}
@@ -71,7 +77,7 @@ class Weibo extends Component {
           ""
         )}
         <div className="listFoot">
-          <div>{weibo.reposts_count}</div>
+          <div onClick={this.goToPost.bind(this, weibo.id)}>{weibo.reposts_count}</div>
           <div>{weibo.comments_count}</div>
           <div>{weibo.attitudes_count}</div>
         </div>

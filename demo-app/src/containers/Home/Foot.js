@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Logout,Logoutt } from "../../api/user";
-import { Control } from "react-keeper";
+import { Control, Link } from "react-keeper";
 import { Key, access_token, reUri } from "../../config/config"
 import "./headFoot.css";
 
@@ -30,7 +30,7 @@ class Foot extends Component {
             <div >
                 <div style={{ "bottom": -3 }} className="foot">
                     <div>主页</div>
-                    <div>消息</div>
+                    <Link type="div" to={"/NotFound"}>消息</Link>
                     <div>热门</div>
                 </div>
                 <div className="qiuqiu" onClick={this.goToPost.bind(this)}></div>

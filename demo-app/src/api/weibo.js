@@ -73,3 +73,48 @@ export function shortToLong(urls) {
 }
 // http://gslb.miaopai.com/stream/.mp4
 // const audioUrl = handleUrl(text.match(/(http:\/\/t.cn\/\w+)/g))
+
+
+export function submit_text(status){
+  
+  var postData = {
+    access_token,
+    status: status
+}
+
+var config = {
+    method: 'post',
+    url: '/statuses/update.json',
+    baseURL: "http://127.0.0.1:3002",
+    data: postData,
+    headers: {
+        'Content-Type': 'application/json'
+    }
+}
+  return axios(config)
+}
+
+export function create_comment(comment, id){
+  var data = {
+    access_token,
+    comment,
+    id
+  }
+
+  return axios.get('/api/comment_create',{
+    params: data
+  })
+
+}
+
+export function repost(id){
+  var data = {
+    access_token,
+    id
+  }
+
+  return axios.get('/api/repost',{
+    params: data
+  })
+
+}

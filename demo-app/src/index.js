@@ -22,7 +22,9 @@ function _getShouquan() {
       params: Code
     })
     .then(res => {
-      localStorage.setItem("access_token", JSON.parse(res.data).access_token);
+      const data =  JSON.parse(res.data);
+      localStorage.setItem("access_token", data.access_token);
+      localStorage.setItem("uid", data.uid);
     });
 }
 

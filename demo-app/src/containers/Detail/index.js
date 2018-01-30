@@ -24,7 +24,6 @@ class Detail extends Component {
     };
   }
   componentWillUnmount() {
-    //重写组件的setState方法，直接返回空
     this.setState = (state, callback) => {
       return;
     };
@@ -60,7 +59,7 @@ class Detail extends Component {
   render() {
     const { commentList, weibo } = this.state;
     return (
-      <div>
+      <div className="detail">
         <Head />
         <div style={{ height: 50 }} />
         <Scroll

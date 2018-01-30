@@ -17,8 +17,64 @@ apiRoutes.get('/toLong', function(req, res) {
     })
 })
 
-apiRoutes.post('/post', function(req, res) {
-    
+apiRoutes.get('/post', function(req, res) {
+    console.log(req.query)
+    const data = {
+        access_token: req.query.access_token,
+        status: req.query.status
+    }
+    request.post({
+        url: "https://api.weibo.com/2/statuses/update.json",
+        form: data,
+        encoding:'utf8'
+    },
+    function(error, response, body){
+        if(response.statusCode == 200){
+            res.json(body)
+        }else{
+            console.log(body)
+            console.log(response.statusCode);
+        }
+    })
+})
+apiRoutes.get('/comment_create', function(req, res) {
+    const data = {
+        access_token: req.query.access_token,
+        comment: req.query.comment,
+        id: req.query.id
+    }
+    request.post({
+        url: "https://api.weibo.com/2/comments/create.json",
+        form: data,
+        encoding:'utf8'
+    },
+    function(error, response, body){
+        if(response.statusCode == 200){
+            res.json(body)
+        }else{
+            console.log(body)
+            console.log(response.statusCode);
+        }
+    })
+})
+apiRoutes.get('/repost', function(req, res) {
+    const data = {
+        access_token: req.query.access_token,
+        id: req.query.id
+    }
+    request.post({
+        url: "https://api.weibo.com/2/statuses/repost.json",
+        form: data,
+        encoding:'utf8'
+    },
+    function(error, response, body){
+        if(response.statusCode == 200){
+            res.json(body)
+        }else{
+            console.log(body)
+            console.log(response.statusCode);
+        }
+    })
 })
 apiRoutes.get('/shouquan', function(req, res) {
     const Code = (req.query)['0']
@@ -37,6 +93,7 @@ apiRoutes.get('/shouquan', function(req, res) {
         function(error, response, body){
             if(response.statusCode == 200){
                 res.json(body)
+                console.log(body)
             }else{
                 console.log(response.statusCode);
             }
