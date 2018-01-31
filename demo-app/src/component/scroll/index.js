@@ -73,7 +73,7 @@ class Scroll extends Component {
           className="loadMore"
           ref="loadMore"
           onClick={this._onReachBottom.bind(this)}>
-          加载更多
+          {this.props.load_tip ? "加载更多" : "没有更多了~"}
         </div>
       </div>
     );

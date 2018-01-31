@@ -1,21 +1,24 @@
 import React, { Component } from "react";
 import PureRenderMixin from 'react-addons-pure-render-mixin'
-import { getEmotions } from "../api/weibo";
-import { getUserMsg } from "../api/user";
-import { handleUser } from "../utils/class/user";
+import { getEmotions } from "../../api/weibo";
+import { getUserMsg } from "../../api/user";
+import { handleUser } from "../../utils/class/user";
 
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import * as userinfoActionsFromOtherFile from "../action/userinfo";
-import * as emotionActionsFromOtherFile from "../action/emotion";
+import * as userinfoActionsFromOtherFile from "../../action/userinfo";
+import * as emotionActionsFromOtherFile from "../../action/emotion";
 
-import Head from "../containers/Home/Head";
-import Foot from "../containers/Home/Foot";
+import Head from "./Head";
+import Foot from "./Foot";
 
 class Index extends Component {
   constructor(props, context) {
     super(props, context);
     this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
+    this.state = {
+      currentTag: ""
+    }
   }
   componentDidMount() {
     getEmotions().then(res => {
@@ -31,7 +34,7 @@ class Index extends Component {
   }
   render() {
     return (
-      <div style={{ marginTop: 50 }} className="Index">
+      <div className="Index">
         <Head />
         {this.props.children}
         <Foot />

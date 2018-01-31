@@ -11,7 +11,7 @@ class User extends Component {
     Control.go(-1);
     setTimeout(() => {
       document.getElementsByClassName("Index")[0].style.display = "block";
-    }, 200);
+    }, 100);
   }
   SwitchTab() {
     const switchs = this.props.SwitchTab;

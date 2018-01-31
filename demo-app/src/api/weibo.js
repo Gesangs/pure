@@ -27,7 +27,7 @@ export function getWeiBoDetail(id) {
   return jsonp(url, data)
 }
 
-// 获取某个用户最新发表的微博列表
+// 获取登录用户最新发表的微博列表
 // http://open.weibo.com/wiki/2/statuses/user_timeline
 export function getUserWeiBo(uid) {
   const url = 'https://api.weibo.com/2/statuses/user_timeline.json'
@@ -37,6 +37,8 @@ export function getUserWeiBo(uid) {
   }
   return jsonp(url, data)
 }
+
+
 
 
 // 获取指定微博的转发微博列表
@@ -74,43 +76,47 @@ export function shortToLong(urls) {
 // http://gslb.miaopai.com/stream/.mp4
 // const audioUrl = handleUrl(text.match(/(http:\/\/t.cn\/\w+)/g))
 
-
-export function submit_text(status){
+// 发布一条微博
+// http://open.weibo.com/wiki/2/statuses/update
+export function post_text(status){
   
-  var postData = {
+  const data = {
     access_token,
-    status: status
+    status
 }
 
-var config = {
-    method: 'post',
-    url: '/statuses/update.json',
-    baseURL: "http://127.0.0.1:3002",
-    data: postData,
-    headers: {
-        'Content-Type': 'application/json'
-    }
-}
-  return axios(config)
-}
-
-export function create_comment(comment, id){
-  var data = {
-    access_token,
-    comment,
-    id
-  }
-
-  return axios.get('/api/comment_create',{
+  return axios.get('/api/post_text',{
     params: data
   })
+}
+// 发布一条图文微博
+// http://open.weibo.com/wiki/2/statuses/upload
+export function post_image(status, file){
+  const reader = new FileReader()
+  reader.readAsBinaryString(file)
+  reader.onloadend = function (){
+    let form = new FormData()
+    form.append('access_token', access_token)
+    form.append('status', status)
+    form.append('pic', this.result)
 
+    return axios.get('/api/post_image',{
+      params: form,
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    })
+  }
 }
 
-export function repost(id){
+// 转发一条微博
+// http://open.weibo.com/wiki/2/statuses/repost
+export function repost(id, status ,is_comment){
   var data = {
     access_token,
-    id
+    id,
+    status,
+    is_comment
   }
 
   return axios.get('/api/repost',{

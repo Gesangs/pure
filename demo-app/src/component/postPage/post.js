@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PureRenderMixin from 'react-addons-pure-render-mixin'
 import { connect } from "react-redux";
 import { Control } from "react-keeper";
-import { repost } from "../../api/weibo"
+import * as api from "../../api/comment"
 import "./style.css"
 
 class Post extends Component{
@@ -25,10 +25,10 @@ class Post extends Component{
     }
     Submit(){
         const value = this.state.value
-        // const id = Control.state.id;
-        // repost(id).then((res) => {
-        //     console.log(res);
-        // })
+        const id = Control.state.id;
+        api.create_comment(value, id).then((res) => {
+            console.log(res);
+        })
     }
     selectImg() {
         this.refs.inputer.click();
@@ -61,22 +61,22 @@ class Post extends Component{
         this.imgPreview(this.state.file)
     }
     render() {
-        // const user = this.props.userinfo.userinfo;
+        const user = this.props.userinfo.userinfo;
         const {value, dataUrl} = this.state;
         return(
             <div className="post">
                 <div className="postHead">
-                    {/* <img src={user.head_pic} /> */}
+                    <img src={user.head_pic} />
                     <div>
-                    {/* <span>{Control.state.title}</span> */}
-                    {/* <div style={{fontSize: 11}}>{user.name}</div> */}
+                    <span>{Control.state.title}</span>
+                    <div style={{fontSize: 11}}>{user.name}</div>
                     </div>
                 </div>
                 <form>
                     <textarea 
                      value={value} 
                      onChange={this.handleChange.bind(this)}
-                    //  placeholder={Control.state.preText} 
+                     placeholder={Control.state.preText} 
                       />
                 </form>
                 <div className="status-image">
@@ -93,7 +93,7 @@ class Post extends Component{
                     <input type="file" style={{display:"none"}} onChange={this.imageChange.bind(this)}  ref="inputer" accept="image/*" />
                 </div>
                 <div className="footBar">
-                    <label for="cBox"><input type="checkbox" id="cBox" />同时转发到我的微博</label>
+                    <label htmlFor="cBox"><input type="checkbox" id="cBox" />同时转发到我的微博</label>
                     <div className="left-bar">
                         {value.length}/140
                         <span>公开</span>
@@ -111,19 +111,19 @@ class Post extends Component{
 }
 
 
-// function mapStateToProps(state) {
-//     return {
-//       userinfo: state.userinfo
-//     }
-//   }
+function mapStateToProps(state) {
+    return {
+      userinfo: state.userinfo
+    }
+  }
   
-//   function mapDispatchToProps(dispatch) {
-//     return {
-//     }
-//   }
-//   export default connect(
-//     mapStateToProps,
-//     mapDispatchToProps
-//   )(Post)
+  function mapDispatchToProps(dispatch) {
+    return {
+    }
+  }
+  export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(Post)
 
-export default Post
+// export default Post

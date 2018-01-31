@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux'
 import { Control } from "react-keeper";
-import "./headFoot.css";
+import "./style.css";
 class Head extends Component {
   constructor() {
     super();

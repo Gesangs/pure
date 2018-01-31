@@ -19,8 +19,9 @@ class Detail extends Component {
       this
     );
     this.state = {
-      weibo: {},
-      commentList: []
+      weibo: Control.state.weibo || {},
+      commentList: [],
+      isMore: true
     };
   }
   componentWillUnmount() {
@@ -41,33 +42,38 @@ class Detail extends Component {
   _getComments() {
     const id = this.props.params.id;
     getComments(id).then(res => {
+      const data = res.data;
       this.setState({
-        commentList: handleCommentList(res.data.comments)
+        commentList: handleCommentList(data.comments),
+        isMore: data.total_number > 50
       });
     });
   }
   _getMoreComments() {
+    if(!this.state.isMore) return
     let page = 2;
     const id = this.props.params.id;
-    return getComments(id, page++).then(res => {
+    return getComments(id, page).then(res => {
       const commentList = handleCommentList(res.data.comments);
       this.setState({
-        commentList: [...this.state.commentList, ...commentList]
+        commentList: [...this.state.commentList, ...commentList],
+        isMore: res.data.total_number > page * 50
       });
+      page++;
     });
   }
   render() {
-    const { commentList, weibo } = this.state;
+    const { commentList, weibo, isMore } = this.state;
     return (
       <div className="detail">
         <Head />
-        <div style={{ height: 50 }} />
         <Scroll
           onPullDownRefresh={this._getComments.bind(this)}
           onReachBottom={this._getMoreComments.bind(this)}
+          load_tip={isMore}
           ref="scroll"
         >
-          <Weibo weibo={Control.state.weibo} />
+          <Weibo weibo={this.state.weibo} />
           <div
             style={{
               backgroundColor: "rgb(240, 240, 240)",

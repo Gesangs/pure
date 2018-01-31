@@ -77,8 +77,8 @@ class Weibo extends Component {
           ""
         )}
         <div className="listFoot">
-          <div onClick={this.goToPost.bind(this, weibo.id)}>{weibo.reposts_count}</div>
-          <div>{weibo.comments_count}</div>
+          <div>{weibo.reposts_count}</div>
+          <div onClick={this.goToPost.bind(this, weibo.id)}>{weibo.comments_count}</div>
           <div>{weibo.attitudes_count}</div>
         </div>
       </div>

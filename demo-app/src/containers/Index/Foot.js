@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Logout,Logoutt } from "../../api/user";
 import { Control, Link } from "react-keeper";
 import { Key, access_token, reUri } from "../../config/config"
-import "./headFoot.css";
+import "./style.css";
 
 class Foot extends Component {
     constructor() {
@@ -29,9 +29,9 @@ class Foot extends Component {
         return(
             <div >
                 <div style={{ "bottom": -3 }} className="foot">
-                    <div>主页</div>
-                    <Link type="div" to={"/NotFound"}>消息</Link>
-                    <div>热门</div>
+                    <Link type="div" to={'/'}>主页</Link>
+                    <Link type="div" to={'/massage'}>消息</Link>
+                    <Link type="div" to={'/massage'}>热门</Link>
                 </div>
                 <div className="qiuqiu" onClick={this.goToPost.bind(this)}></div>
             </div>

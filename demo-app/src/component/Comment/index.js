@@ -21,7 +21,7 @@ class Comment extends Component {
     render() {
         const comments = this.props.commentList;
         return(
-            <div>
+            <div style={{zIndex:4}}>
             {comments.map((item, index) => (
                 <div className="commentList" key={index}>
                     <div className="listHead">

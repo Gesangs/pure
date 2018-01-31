@@ -12,7 +12,6 @@ class Home extends Component {
     this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
     this.state = {
       weiboList: [],
-      page: 2
     };
   }
   componentWillMount() {
@@ -45,6 +44,7 @@ class Home extends Component {
         <Scroll
           onPullDownRefresh={this._getNewWeiBo.bind(this)}
           onReachBottom={this._getMoreWeiBo.bind(this)}
+          load_tip={true}
           ref="scroll"
         >
           <WeiboList weiboList={weiboList} />
