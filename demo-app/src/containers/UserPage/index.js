@@ -20,7 +20,7 @@ class UserPage extends Component {
     };
   }
   componentDidMount() {
-    if(this.state.show) {
+    if(localStorage.getItem("uid") !== this.state.userinfo) {
       getUserWeiBo(this.state.user.id).then(res => {
         this.setState({
           weiboList: handleWeiboList(res.data.statuses) || false

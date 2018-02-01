@@ -1,6 +1,6 @@
 
 export function numFormat(s) {
-    const str = s.toFixed(0);
+    const str = Number.parseInt(s).toFixed(0);
     switch(str.length) {
         case 1:
         case 2:

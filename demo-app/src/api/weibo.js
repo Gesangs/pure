@@ -1,4 +1,4 @@
-import jsonp from './jsonp';
+import {jsonp} from './jsonp';
 import { access_token } from "../config/config"
 import axios from 'axios'
 // 获取当前登录用户及其所关注（授权）用户的最新微博

@@ -32,18 +32,21 @@ class Scroll extends Component {
   }
   // 上拉加载
   _onReachBottom() {
+    if(!this.props.onReachBottom) return
     const loadMore = this.refs.loadMore;
     const top = loadMore.getBoundingClientRect().top;
     const windowInnerHeight =
       window.screen.height ||
       window.innerHeight ||
       document.documentElement.clientHeight;
-    if (top && top < windowInnerHeight) {
+    if (top && top < windowInnerHeight && this.props.load_tip) {
       this.props.onReachBottom();
     }
   }
   _handleTouchMove(e) {
     const touch = e.touches[0];
+    const fun = this.props.onPullDownRefresh;
+    if(fun) {
     this.state.deltaY = (touch.pageY - this.state.startY) * 0.6;
     if (this.state.deltaY > 110) this.state.deltaY = 110;
     if (this.state.deltaY > 20 && window.scrollY === 0) {
@@ -52,6 +55,7 @@ class Scroll extends Component {
     }
     if (this.state.deltaY >= 90 && window.scrollY === 0)
       this._onPullDownRefresh();
+    }
   }
   _handleTouchEnd(e) {
     this._onReachBottom();

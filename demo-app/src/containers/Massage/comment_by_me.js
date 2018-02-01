@@ -1,15 +1,16 @@
 import React, { Component } from "react";
-import PureRenderMixin from 'react-addons-pure-render-mixin'
+import PureRenderMixin from "react-addons-pure-render-mixin";
+import MsgList from "../../component/MsgList/index";
 class CommentByMe extends Component {
-    constructor(props, context) {
-        super(props, context);
-        this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
-      }
-    render() {
-        return (
-            <h1>CommentByMe</h1>
-        )
-    }
+  constructor(props, context) {
+    super(props, context);
+    this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(
+      this
+    );
+  }
+  render() {
+    return <MsgList getNewData={"getCommentsByMe"} />;
+  }
 }
 
-export default CommentByMe
+export default CommentByMe;

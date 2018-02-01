@@ -36,6 +36,11 @@ class Comment extends Component {
                         </div>
                     </div>
                     <Content con={item.content} />
+                    {item.reply_content 
+                    ? <div className="reply_comment">
+                        <Content con={item.reply_content} />
+                    </div> 
+                    : ""}
                 </div>
             ))}
             </div>

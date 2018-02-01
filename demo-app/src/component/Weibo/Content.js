@@ -48,7 +48,7 @@ class Content extends Component {
     render() {
       const content = this.handleNodes(this.props.con);
       return (
-        <div>
+        <div className="Content">
           {content.map((item, index) => {
             return (
               <span key={index}>
@@ -57,7 +57,7 @@ class Content extends Component {
                 ) : item[0] === "all" ? (
                   <a>{item[1]}</a>
                 ) : item[0] === "icon" ? (
-                  <img alt={item[1]} src={item[2]} style={{ width: 18, height: 18 }} />
+                 item[2] ? <img alt={item[1]} src={item[2]} style={{ width: 18, height: 18 }} /> : item[1]
                 ) : item[0] === "text" ? (
                   item[1]
                 ) : item[0] === "topic" ? (

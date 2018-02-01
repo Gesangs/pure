@@ -1,4 +1,4 @@
-import jsonp from './jsonp'
+import {jsonp} from './jsonp'
 import { access_token } from "../config/config"
 
 

@@ -33,7 +33,7 @@ class Foot extends Component {
                     <Link type="div" to={'/massage'}>消息</Link>
                     <Link type="div" to={'/massage'}>热门</Link>
                 </div>
-                <div className="qiuqiu" onClick={this.goToPost.bind(this)}></div>
+                {Control.path === "/" ?<div className="qiuqiu" onClick={this.goToPost.bind(this)}></div> : ""}
             </div>
         )
     }

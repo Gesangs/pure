@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import PureRenderMixin from 'react-addons-pure-render-mixin'
+import {stopPro} from "../../utils/stopPro"
+import { Control } from "react-keeper";
 class ListImg extends Component {
     constructor(props, context) {
       super(props, context);
@@ -7,6 +9,13 @@ class ListImg extends Component {
       this.state = {
         isFull: false
       };
+    }
+    goToImageZoom(imgs, index, e){
+      stopPro(e)
+      Control.go("/imageZoom" ,{ imagelist:imgs, current: index })
+      // setTimeout(() => {
+      //   document.getElementsByClassName("Index")[0].style.display = 'none';
+      // },200)
     }
     render() {
       const imgs = this.props.imgs;
@@ -21,6 +30,7 @@ class ListImg extends Component {
                 className="weiboImg"
                 key={index}
                 style={{ backgroundImage: `url(${imgUrl})` }}
+                onClick={this.goToImageZoom.bind(this, imgs, index+1)}
               />
             );
           })}
