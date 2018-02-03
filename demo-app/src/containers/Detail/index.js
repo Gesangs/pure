@@ -10,7 +10,7 @@ import Head from "./Head";
 import Foot from "./Foot";
 import Weibo from "../../component/Weibo/index";
 import Comment from "../../component/Comment/index";
-import Scroll from "../../component/scroll/index";
+import Scroll from "../../component/Scroll/index";
 
 class Detail extends Component {
   constructor(props, context) {
@@ -71,7 +71,6 @@ class Detail extends Component {
           onPullDownRefresh={this._getComments.bind(this)}
           onReachBottom={this._getMoreComments.bind(this)}
           load_tip={isMore}
-          ref="scroll"
         >
           <Weibo weibo={this.state.weibo} />
           <div

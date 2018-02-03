@@ -3,7 +3,7 @@ import PureRenderMixin from 'react-addons-pure-render-mixin'
 import { getNewWeiBo } from "../../api/weibo";
 import { handleWeiboList } from "../../utils/class/weibo";
 
-import Scroll from "../../component/scroll/index";
+import Scroll from "../../component/Scroll/index";
 import WeiboList from "../../component/WeiboList";
 
 class Home extends Component {
@@ -45,7 +45,6 @@ class Home extends Component {
           onPullDownRefresh={this._getNewWeiBo.bind(this)}
           onReachBottom={this._getMoreWeiBo.bind(this)}
           load_tip={true}
-          ref="scroll"
         >
           <WeiboList weiboList={weiboList} />
         </Scroll>

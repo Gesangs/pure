@@ -4,15 +4,15 @@ import { HashRouter,Route } from "react-keeper";
 import Index from "../containers/Index/index";
 import Home from "../containers/Home/index"
 import Massage from "../containers/Massage/index"
-import AtMeComment from "../containers/Massage/at_me_comment"
-import AtMeWeibo from "../containers/Massage/at_me_weibo"
-import CommentByMe from "../containers/Massage/comment_by_me"
-import CommentToMe from "../containers/Massage/comment_to_me"
+import AtMeComment from "../containers/Massage/At_me_comment"
+import AtMeWeibo from "../containers/Massage/At_me_weibo"
+import CommentByMe from "../containers/Massage/Comment_by_me"
+import CommentToMe from "../containers/Massage/Comment_to_me"
 
 import UserPage from "../containers/UserPage/index";
 import Detail from "../containers/Detail/index";
-import Post from "../component/postPage/post";
-import ImageZoom from "../component/imageZoom/index"
+import Post from "../component/PostPage/Post";
+import ImageZoom from "../component/ImageZoom/index"
 import NotFound from "../containers/404";
 
 class RouterMap extends Component {

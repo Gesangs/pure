@@ -5,8 +5,9 @@ import { getUserMsgByUid } from "../../api/user";
 import { handleWeiboList } from "../../utils/class/weibo";
 import { handleUser } from "../../utils/class/user";
 import { Control } from "react-keeper";
+
 import User from "./User/index";
-import AboutUser from "./aboutUser/index"
+import AboutUser from "./AboutUser/index"
 import WeiboList from "../../component/WeiboList";
 
 class UserPage extends Component {
@@ -20,8 +21,9 @@ class UserPage extends Component {
     };
   }
   componentDidMount() {
-    if(localStorage.getItem("uid") !== this.state.userinfo) {
-      getUserWeiBo(this.state.user.id).then(res => {
+    const id = this.state.userinfo.id
+    if(localStorage.getItem("uid") == id) {
+      getUserWeiBo(id).then(res => {
         this.setState({
           weiboList: handleWeiboList(res.data.statuses) || false
         });
@@ -29,7 +31,7 @@ class UserPage extends Component {
     }
   }
   SwitchTab(){
-    if(localStorage.getItem("uid") !== this.state.userinfo) return;
+    if(localStorage.getItem("uid") != this.state.userinfo.id) return;
     this.setState({
       showList: !this.state.showList
     })

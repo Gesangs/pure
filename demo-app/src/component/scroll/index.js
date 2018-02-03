@@ -7,10 +7,11 @@ class Scroll extends Component {
   constructor(props, context) {
     super(props, context);
     this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
-    this.state = {
-      startY: 0,
-      deltaY: 0
-    };
+      this.startY = 0
+      this.deltaY = 0
+      this.loadMore = null;
+      this.refresh = null;
+
   }
   componentDidMount() {
     scrollDisplay();
@@ -18,23 +19,20 @@ class Scroll extends Component {
 
   _handleTouchStart(e) {
     const touch = e.touches[0];
-    this.setState({
-      startY: touch.pageY
-    });
+    this.startY = touch.pageY
   }
   // 下拉刷新
   _onPullDownRefresh() {
     clearTimeout(this.timer);
     this.timer = setTimeout(() => {
       this.props.onPullDownRefresh();
-      this.refs.refresh.style.transform = `translate3d(-50%,-120px,0)`;
+      this.refresh.style.transform = `translate3d(-50%,-120px,0)`;
     }, 600);
   }
   // 上拉加载
   _onReachBottom() {
     if(!this.props.onReachBottom) return
-    const loadMore = this.refs.loadMore;
-    const top = loadMore.getBoundingClientRect().top;
+    const top = this.loadMore.getBoundingClientRect().top;
     const windowInnerHeight =
       window.screen.height ||
       window.innerHeight ||
@@ -47,21 +45,21 @@ class Scroll extends Component {
     const touch = e.touches[0];
     const fun = this.props.onPullDownRefresh;
     if(fun) {
-    this.state.deltaY = (touch.pageY - this.state.startY) * 0.6;
-    if (this.state.deltaY > 110) this.state.deltaY = 110;
-    if (this.state.deltaY > 20 && window.scrollY === 0) {
-      this.refs.refresh.style.transform = `translate3d(-50%,${this.state.deltaY - 30}px,0)`;
-      this.refs.refresh.style.transition = `all 0s ease`;
-    }
-    if (this.state.deltaY >= 90 && window.scrollY === 0)
-      this._onPullDownRefresh();
+      this.deltaY = (touch.pageY - this.startY) * 0.6;
+      if (this.deltaY > 110) this.deltaY = 110;
+      if (this.deltaY > 20 && window.scrollY === 0) {
+        this.refresh.style.transform = `translate3d(-50%,${this.deltaY - 30}px,0)`;
+        this.refresh.style.transition = `all 0s ease`;
+      }
+      if (this.deltaY >= 90 && window.scrollY === 0)
+        this._onPullDownRefresh();
     }
   }
   _handleTouchEnd(e) {
     this._onReachBottom();
-    this.refs.refresh.style.transition = `all 0.6s ease`;
-    if (this.state.deltaY !== 110) {
-      this.refs.refresh.style.transform = `translate3d(-50%,-120px,0)`;
+    this.refresh.style.transition = `all 0.6s ease`;
+    if (this.deltaY !== 110) {
+      this.refresh.style.transform = `translate3d(-50%,-120px,0)`;
     }
   }
   render() {
@@ -71,11 +69,11 @@ class Scroll extends Component {
         onTouchMove={this._handleTouchMove.bind(this)}
         onTouchEnd={this._handleTouchEnd.bind(this)}
         className="wrapper">
-        <div className="refresh" ref="refresh" />
+        <div className="refresh" ref={(refresh) => {this.refresh = refresh}} />
         {this.props.children}
         <div
           className="loadMore"
-          ref="loadMore"
+          ref={(loadMore) => {this.loadMore = loadMore}}
           onClick={this._onReachBottom.bind(this)}>
           {this.props.load_tip ? "加载更多" : "没有更多了~"}
         </div>

@@ -24,7 +24,7 @@ class ImageZoom extends Component {
         })
     }
     close() {
-        Control.go(-1);
+        Control.go("/");
         setTimeout(() => {
         document.getElementsByClassName("Index")[0].style.display = "block";
         }, 100);
