@@ -28,8 +28,8 @@ class Index extends Component {
     });
     getUserMsg().then((res) => {
       this.props.userinfoActions.update({
-      userinfo: handleUser(res.data) 
-    });
+        userinfo: handleUser(res.data) 
+      });
     })
   }
   render() {

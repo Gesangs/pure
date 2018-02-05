@@ -19,7 +19,7 @@ function getDateDiff(dateTimeStamp) {
   let minC = diffValue / minute;
   let result = "";
   if (dayC >= 7) {
-    result = `${dateTimeStamp.getFullYear()}-${dateTimeStamp.getMonth() + 1}-${dateTimeStamp.getDate()}`;
+    result = dateTimeStamp.toISOString().slice(0,10);
   } else if (dayC >= 1) {
     result = "" + parseInt(dayC) + "天前";
   } else if (hourC >= 1) {

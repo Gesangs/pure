@@ -9,7 +9,7 @@ export function getNewWeiBo(page = 1) {
   const  data = {
       access_token,
       page,
-      count:30
+      count:10
     }
   
   return jsonp(url, data)

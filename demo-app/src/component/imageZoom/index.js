@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import PureRenderMixin from 'react-addons-pure-render-mixin'
+import ImageView from './react-imageviewer/index'
 import { Control } from "react-keeper";
-import ImageView from 'react-imageview'
-import 'react-imageview/dist/react-imageview.min.css'
 
 class ImageZoom extends Component {
     constructor(props, context) {
@@ -25,9 +24,6 @@ class ImageZoom extends Component {
     }
     close() {
         Control.go("/");
-        setTimeout(() => {
-        document.getElementsByClassName("Index")[0].style.display = "block";
-        }, 100);
     }
     render() {
         const {imglist, current} = this.state

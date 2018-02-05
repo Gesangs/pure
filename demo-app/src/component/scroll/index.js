@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import PureRenderMixin from 'react-addons-pure-render-mixin'
-import "./style.css";
 import { scrollDisplay } from "../../utils/pullToRefresh";
+import "./style.css";
+
 
 class Scroll extends Component {
   constructor(props, context) {
@@ -11,7 +12,7 @@ class Scroll extends Component {
       this.deltaY = 0
       this.loadMore = null;
       this.refresh = null;
-
+      this.islock = false;
   }
   componentDidMount() {
     scrollDisplay();
@@ -25,7 +26,7 @@ class Scroll extends Component {
   _onPullDownRefresh() {
     clearTimeout(this.timer);
     this.timer = setTimeout(() => {
-      this.props.onPullDownRefresh();
+      // this.props.onPullDownRefresh();
       this.refresh.style.transform = `translate3d(-50%,-120px,0)`;
     }, 600);
   }
@@ -46,19 +47,19 @@ class Scroll extends Component {
     const fun = this.props.onPullDownRefresh;
     if(fun) {
       this.deltaY = (touch.pageY - this.startY) * 0.6;
-      if (this.deltaY > 110) this.deltaY = 110;
+      if (this.deltaY > 100) this.deltaY = 100;
       if (this.deltaY > 20 && window.scrollY === 0) {
         this.refresh.style.transform = `translate3d(-50%,${this.deltaY - 30}px,0)`;
         this.refresh.style.transition = `all 0s ease`;
       }
-      if (this.deltaY >= 90 && window.scrollY === 0)
+      if (this.deltaY === 100 && window.scrollY === 0)
         this._onPullDownRefresh();
     }
   }
   _handleTouchEnd(e) {
     this._onReachBottom();
     this.refresh.style.transition = `all 0.6s ease`;
-    if (this.deltaY !== 110) {
+    if (this.deltaY !== 100) {
       this.refresh.style.transform = `translate3d(-50%,-120px,0)`;
     }
   }
