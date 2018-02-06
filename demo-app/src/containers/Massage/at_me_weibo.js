@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PureRenderMixin from "react-addons-pure-render-mixin";
-import MsgList from "../../component/MsgList/index";
+import MsgList from "../../component/msglist/index";
 class AtMeWeibo extends Component {
   constructor(props, context) {
     super(props, context);

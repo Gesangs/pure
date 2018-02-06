@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PureRenderMixin from 'react-addons-pure-render-mixin'
-import Content from "../../component/Weibo/Content"
+import Content from "../../component/weibo/content"
 import { getComments } from "../../api/comment"
 import { stopPro } from "../../utils/stopPro"
 import { Control } from "react-keeper";

@@ -9,8 +9,8 @@ import { connect } from "react-redux";
 import * as userinfoActionsFromOtherFile from "../../action/userinfo";
 import * as emotionActionsFromOtherFile from "../../action/emotion";
 
-import Head from "./Head";
-import Foot from "./Foot";
+import Head from "./head";
+import Foot from "./foot";
 
 class Index extends Component {
   constructor(props, context) {

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PureRenderMixin from 'react-addons-pure-render-mixin'
-import ListImg  from "./ListImg";
-import Content from "./Content";
+import ListImg  from "./listimg";
+import Content from "./content";
 import { stopPro } from "../../utils/stopPro"
 import { Control } from "react-keeper";
 import "./weibo.css";

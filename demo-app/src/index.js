@@ -5,7 +5,7 @@ import { Key, access_token,  reUri } from "./config/config.js";
 import axios from "axios";
 import configureStore from './store/configureStore'
 import registerServiceWorker from "./registerServiceWorker";
-import RouterMap from "./router/routerMap"
+import RouterMap from "./router/routermap"
 const store = configureStore()
 
 const Code = window.location.href.split("=")[1];

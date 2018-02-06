@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PureRenderMixin from 'react-addons-pure-render-mixin'
-import WeiboList from "../WeiboFlow/index"
+import WeiboList from "../weiboflow/index"
 
 class Home extends Component {
     constructor(props, context){

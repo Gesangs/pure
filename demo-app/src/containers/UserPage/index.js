@@ -6,9 +6,9 @@ import { handleWeiboList } from "../../utils/class/weibo";
 import { handleUser } from "../../utils/class/user";
 import { Control } from "react-keeper";
 
-import User from "./User/index";
-import AboutUser from "./AboutUser/index"
-import WeiboList from "../../component/WeiboList";
+import User from "./user/index";
+import AboutUser from "./aboutuser/index"
+import WeiboList from "../../component/weibolist";
 
 class UserPage extends Component {
   constructor(props, context) {

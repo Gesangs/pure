@@ -5,7 +5,7 @@ import Singleton from 'react-singleton'
 
 import AlloyFinger from './libs/alloyfinger.js'
 import Transform from './libs/transform.js'
-import { CenterImage } from './CenterImage.js'
+import { CenterImage } from './centerImage.js'
 
 import './style.css'
 

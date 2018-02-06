@@ -6,11 +6,11 @@ import { handleCommentList } from "../../utils/class/comment";
 import { handleWeibo } from "../../utils/class/weibo";
 import { Control } from "react-keeper";
 
-import Head from "./Head";
-import Foot from "./Foot";
-import Weibo from "../../component/Weibo/index";
-import Comment from "../../component/Comment/index";
-import Scroll from "../../component/Scroll/index";
+import Head from "./head";
+import Foot from "./foot";
+import Weibo from "../../component/weibo/index";
+import Comment from "../../component/comment/index";
+import Scroll from "../../component/scroll/index";
 
 class Detail extends Component {
   constructor(props, context) {

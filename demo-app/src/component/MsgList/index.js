@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PureRenderMixin from "react-addons-pure-render-mixin";
-import Scroll from "../Scroll/index";
-import Comment from "../Comment/index";
+import Scroll from "../scroll/index";
+import Comment from "../comment/index";
 import * as api from "../../api/comment";
 import { handleCommentList } from "../../utils/class/comment";
 class MsgList extends Component {

@@ -1,19 +1,19 @@
 import React, { Component } from "react";
 import { HashRouter,Route } from "react-keeper";
 
-import Index from "../containers/Index/index";
-import Home from "../containers/Home/index"
-import Massage from "../containers/Massage/index"
-import AtMeComment from "../containers/Massage/At_me_comment"
-import AtMeWeibo from "../containers/Massage/At_me_weibo"
-import CommentByMe from "../containers/Massage/Comment_by_me"
-import CommentToMe from "../containers/Massage/Comment_to_me"
-import HotPage from "../containers/HotPage/index"
+import Index from "../containers/index/index.js";
+import Home from "../containers/home/index"
+import Massage from "../containers/massage/index"
+import AtMeComment from "../containers/massage/at_me_comment"
+import AtMeWeibo from "../containers/massage/at_me_weibo"
+import CommentByMe from "../containers/massage/comment_by_me"
+import CommentToMe from "../containers/massage/comment_to_me"
+import HotPage from "../containers/hotpage/index"
 
-import UserPage from "../containers/UserPage/index";
-import Detail from "../containers/Detail/index";
-import Post from "../component/PostPage/Post";
-import ImageZoom from "../component/ImageZoom/index"
+import UserPage from "../containers/userpage/index";
+import Detail from "../containers/detail/index";
+import Post from "../component/postpage/post";
+import ImageZoom from "../component/imagezoom/index"
 import NotFound from "../containers/404";
 
 class RouterMap extends Component {

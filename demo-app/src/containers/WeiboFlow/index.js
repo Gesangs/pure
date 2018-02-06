@@ -3,8 +3,8 @@ import PureRenderMixin from 'react-addons-pure-render-mixin'
 import * as api from "../../api/weibo";
 import { handleWeiboList } from "../../utils/class/weibo";
 
-import Scroll from "../../component/Scroll/index";
-import WeiboList from "../../component/WeiboList";
+import Scroll from "../../component/scroll/index";
+import WeiboList from "../../component/weibolist";
 
 class WeiboFlow extends Component {
   constructor(props, context) {
