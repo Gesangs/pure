@@ -2,16 +2,16 @@ import React, { Component } from "react";
 import PureRenderMixin from 'react-addons-pure-render-mixin'
 import WeiboList from "../WeiboFlow/index"
 
-class Home extends Component {
+class HotPage extends Component {
     constructor(props, context){
         super(props, context)
         this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
     }
      render(){
          return(
-             <WeiboList getNewWeiBo={"getNewWeiBo"} />
+             <WeiboList getNewWeiBo={"getPublicWeiBo"} />
          )
      }
 }
 
-export default Home;
+export default HotPage;

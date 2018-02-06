@@ -31,7 +31,7 @@ class Foot extends Component {
                 <div style={{ "bottom": -3 }} className="foot">
                     <Link type="div" to={'/'}>主页</Link>
                     <Link type="div" to={'/massage'}>消息</Link>
-                    <Link type="div" to={'/massage'}>热门</Link>
+                    <Link type="div" to={'/hot'}>热门</Link>
                 </div>
                 {Control.path === "/" ?<div className="qiuqiu" onClick={this.goToPost.bind(this)}></div> : ""}
             </div>

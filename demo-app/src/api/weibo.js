@@ -41,13 +41,13 @@ export function getUserWeiBo(uid) {
 
 
 
-// 获取指定微博的转发微博列表
-// https://api.weibo.com/2/statuses/repost_timeline.json
-export function getRepostWeiBo(id) {
-  const url = 'https://api.weibo.com/2/statuses/user_timeline.json'
+// 返回最新的公共微博
+// http://open.weibo.com/wiki/2/statuses/public_timeline
+export function getPublicWeiBo(page = 1) {
+  const url = 'https://api.weibo.com/2/statuses/public_timeline.json'
   const data = {
     access_token,
-    id: id
+    page
   }
   return jsonp(url, data)
 }

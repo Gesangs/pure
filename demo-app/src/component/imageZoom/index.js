@@ -23,7 +23,7 @@ class ImageZoom extends Component {
         })
     }
     close() {
-        Control.go("/");
+        Control.go(-1);
     }
     render() {
         const {imglist, current} = this.state

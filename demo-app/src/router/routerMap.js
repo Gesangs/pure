@@ -8,6 +8,7 @@ import AtMeComment from "../containers/Massage/At_me_comment"
 import AtMeWeibo from "../containers/Massage/At_me_weibo"
 import CommentByMe from "../containers/Massage/Comment_by_me"
 import CommentToMe from "../containers/Massage/Comment_to_me"
+import HotPage from "../containers/HotPage/index"
 
 import UserPage from "../containers/UserPage/index";
 import Detail from "../containers/Detail/index";
@@ -31,6 +32,7 @@ class RouterMap extends Component {
               <Route cache='parent' component={AtMeWeibo} path="/at_me_weibo" />
               <Route cache='parent' component={CommentByMe} path="/comment_by_me" />
             </Route>
+            <Route component={HotPage} cache='parent' path="/hot" /> 
           </Route>
           <Route component={UserPage} path="/user/:id" />
           <Route component={Detail} path="/detail/:id" />
